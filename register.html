@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Vanuatu Business Hub connects customers with local businesses across all six provinces.">
+<title>Free Business Registration | Vanuatu Business Hub</title><link rel="icon" type="image/webp" href="assets/Logo.webp"><style>
+:root{--navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed}
+*{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:800;letter-spacing:.3px}.brand span{color:var(--gold)}
+nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700}nav a:hover{color:var(--gold)}
+main{max-width:1320px;margin:32px auto;padding:0 20px}h1,h2{color:var(--navy)}.muted{color:var(--muted);line-height:1.6}
+.panel,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 4px 14px #12304a0a}
+.btn,button{display:inline-block;border:0;border-radius:8px;padding:12px 16px;background:var(--teal);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+.btn.secondary{background:#eaf0f5;color:var(--navy)}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd7df;border-radius:8px;font:inherit;background:white}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:28px}
+.notice{background:#fff8e8;border-left:4px solid var(--gold);padding:13px;border-radius:8px;color:#6d531c;font-size:13px;line-height:1.5;margin:16px 0}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}header{align-items:flex-start}}
+.registration-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);gap:24px;align-items:stretch;margin-top:22px}.registration-form{min-width:0}.registration-visual{position:relative;min-height:650px;border-radius:16px;overflow:hidden;background:var(--navy);box-shadow:0 8px 28px #12304a18}.registration-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.registration-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#071d2b10 20%,#071d2bd9 100%)}.visual-message{position:absolute;z-index:1;left:28px;right:28px;bottom:30px;color:white}.visual-message h2{color:white;font-size:clamp(25px,3vw,38px);line-height:1.12;margin:0 0 10px}.visual-message p{color:#f2f7fa;line-height:1.6;margin:0;font-size:15px}.visual-kicker{display:inline-block;color:var(--navy);background:var(--gold);padding:7px 10px;border-radius:5px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:13px}.registration-form .panel{height:100%}@media(max-width:850px){.registration-layout{grid-template-columns:1fr}.registration-visual{min-height:390px;order:2}}@media(max-width:520px){.registration-visual{min-height:320px}.visual-message{left:20px;right:20px;bottom:22px}}
+
+.site-header{background:var(--navy);color:#fff;padding:10px clamp(16px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:4px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-size:21px;font-weight:800;letter-spacing:.1px;line-height:1.12}
+.brand img{width:58px;height:58px;object-fit:contain;border-radius:50%;background:#fff;padding:2px}
+.brand b{color:#4fd0c6}.brand small{display:block;margin-top:5px;color:#f6c65d;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+nav{display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 0}nav a:hover,nav a:focus{color:var(--gold)}
+.hero-logo{display:block;width:min(100%,820px);height:auto;margin:0 auto 18px;border-radius:12px;box-shadow:0 12px 35px #071d2b25}
+footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:var(--muted);font-size:12px;padding:26px 16px;line-height:1.7}
+@media(max-width:620px){.site-header{justify-content:center}.brand{width:100%;justify-content:center;font-size:18px}.brand img{width:50px;height:50px}nav{justify-content:center;width:100%;gap:14px}nav a{font-size:13px}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
+<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
+<nav aria-label="Main navigation"><a href="index.html">Home</a><a href="directory.html">Directory</a><a href="register.html">List Your Business</a><a href="admin-login.html">Admin</a></nav></header>
+
+<main><h1>Register Your Business</h1><p class="muted">Create a free listing in the Vanuatu Business Hub directory. Your listing will be reviewed before it appears publicly.</p>
+<div class="registration-layout"><section class="registration-form" aria-label="Business registration form">
+<form class="panel" id="registrationForm">
+<div class="grid" style="grid-template-columns:1fr 1fr">
+<div><label for="businessName">Business name *</label><input id="businessName" required maxlength="100"></div>
+<div><label for="category">Business category *</label><select id="category" required><option value="">Choose a category</option><option>Building & Construction</option><option>Food & Agriculture</option><option>Retail & Shopping</option><option>Transport</option><option>Tourism & Accommodation</option><option>Arts & Handicrafts</option><option>Professional Services</option><option>Other Services</option></select></div>
+<div><label for="province">Province *</label><select id="province" required><option value="">Choose province</option><option>Torba</option><option>Sanma</option><option>Penama</option><option>Malampa</option><option>Shefa</option><option>Tafea</option></select></div>
+<div><label for="location">Town / island / area *</label><input id="location" required maxlength="100" placeholder="e.g. Luganville, Santo"></div>
+<div><label for="contactName">Contact person *</label><input id="contactName" required maxlength="100"></div>
+<div><label for="phone">Phone number *</label><input id="phone" required maxlength="40" placeholder="+678 ..."></div>
+<div><label for="email">Email (optional)</label><input id="email" type="email" maxlength="120"></div>
+<div><label for="website">Website or Facebook page (optional)</label><input id="website" type="url" maxlength="200" placeholder="https://..."></div>
+</div>
+<label for="description">Describe your products or services *</label><textarea id="description" required rows="4" maxlength="600"></textarea>
+<p style="font-size:13px;color:#687887"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="consent" required style="width:auto;margin-top:2px"> I confirm that I am authorised to submit these business details and agree that approved listing information may be displayed publicly.</label></p>
+<button type="submit">Submit free listing</button> <a class="btn secondary" href="directory.html">Back to directory</a>
+<div id="formMessage" role="status" style="margin-top:14px"></div></form>
+<div class="notice">Your submission is sent securely to the Hub database for administrator review. Only approved business information is displayed publicly.</div>
+</section><aside class="registration-visual" aria-label="Vanuatu destinations and culture"><img src="assets/gettyimages-sb10068511b-001-612x612.jpg" alt="gettyimages-sb10068511b-001-612x612"><div class="visual-message"><span class="visual-kicker">Made for Vanuatu</span><h2>Showcase Your Business.<br>Connect with Vanuatu.</h2><p>Grow together with customers and communities across all six provinces.</p></div></aside></div></main>
+<footer><strong>Vanuatu Business Hub</strong><br>Connect · Trade · Grow<br>Connecting businesses across Torba, Sanma, Penama, Malampa, Shefa and Tafea.</footer>
+<script>
+const form=document.getElementById('registrationForm'),msg=document.getElementById('formMessage');
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!window.vbhSupabaseReady()){msg.textContent='Database setup is not finished yet. Add your Supabase project URL and anon key to supabase-config.js.';return;}
+ const client=window.supabase.createClient(window.VBH_SUPABASE_URL,window.VBH_SUPABASE_ANON_KEY);
+ const get=id=>document.getElementById(id).value.trim();
+ const record={business_name:get('businessName'),category:get('category'),province:get('province'),location:get('location'),contact_name:get('contactName'),phone:get('phone'),email:get('email')||null,website:get('website')||null,description:get('description'),status:'Pending'};
+ const button=form.querySelector('button[type="submit"]');button.disabled=true;msg.textContent='Submitting...';
+ const {error}=await client.from('businesses').insert(record);
+ button.disabled=false;
+ if(error){msg.textContent='Submission could not be completed: '+error.message;return;}
+ msg.textContent='Thank you. Your business has been submitted and is awaiting administrator review.';form.reset();
+});
+</script></body></html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Vanuatu Business Hub connects customers with local businesses across all six provinces.">
+<title>Business Directory | Vanuatu Business Hub</title><link rel="icon" type="image/webp" href="assets/Logo.webp"><style>
+:root{--navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed}
+*{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:800;letter-spacing:.3px}.brand span{color:var(--gold)}
+nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700}nav a:hover{color:var(--gold)}
+main{max-width:1120px;margin:32px auto;padding:0 20px}h1,h2{color:var(--navy)}.muted{color:var(--muted);line-height:1.6}
+.panel,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 4px 14px #12304a0a}
+.btn,button{display:inline-block;border:0;border-radius:8px;padding:12px 16px;background:var(--teal);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+.btn.secondary{background:#eaf0f5;color:var(--navy)}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd7df;border-radius:8px;font:inherit;background:white}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:28px}
+.notice{background:#fff8e8;border-left:4px solid var(--gold);padding:13px;border-radius:8px;color:#6d531c;font-size:13px;line-height:1.5;margin:16px 0}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}header{align-items:flex-start}}
+
+.site-header{background:var(--navy);color:#fff;padding:10px clamp(16px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:4px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-size:21px;font-weight:800;letter-spacing:.1px;line-height:1.12}
+.brand img{width:58px;height:58px;object-fit:contain;border-radius:50%;background:#fff;padding:2px}
+.brand b{color:#4fd0c6}.brand small{display:block;margin-top:5px;color:#f6c65d;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+nav{display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 0}nav a:hover,nav a:focus{color:var(--gold)}
+.hero-logo{display:block;width:min(100%,820px);height:auto;margin:0 auto 18px;border-radius:12px;box-shadow:0 12px 35px #071d2b25}
+footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:var(--muted);font-size:12px;padding:26px 16px;line-height:1.7}
+.directory-hero{position:relative;isolation:isolate;overflow:hidden;background-image:linear-gradient(90deg,rgba(8,35,62,.72),rgba(8,35,62,.88)),url('assets/VANUATU-blogs-vanuatu-festivals-and-cultural-events-banner-MY-VANUATU-768x480-1.jpg');background-size:cover;background-position:center 48%;color:#fff;padding:76px 20px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.directory-hero h1{color:#fff;margin:0 0 12px;text-shadow:0 2px 12px #071d2b66}.directory-hero p{max-width:680px;margin:0 auto;color:#eef7fb;line-height:1.7;font-size:16px;text-shadow:0 1px 8px #071d2b66}
+@media(max-width:620px){.directory-hero{padding:58px 18px;min-height:260px;background-position:35% center}}
+@media(max-width:620px){.site-header{justify-content:center}.brand{width:100%;justify-content:center;font-size:18px}.brand img{width:50px;height:50px}nav{justify-content:center;width:100%;gap:14px}nav a{font-size:13px}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
+<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
+<nav aria-label="Main navigation"><a href="index.html">Home</a><a href="directory.html">Directory</a><a href="register.html">List Your Business</a><a href="admin-login.html">Admin</a></nav></header>
+
+<section class="directory-hero"><h1>Find Local Businesses Across Vanuatu</h1><p>Search approved business listings by name, service, category or province.</p></section>
+<main><section class="panel"><div class="grid" style="grid-template-columns:2fr 1fr 1fr">
+<input id="search" type="search" placeholder="Search business or service" aria-label="Search">
+<select id="province"><option value="">All provinces</option><option>Torba</option><option>Sanma</option><option>Penama</option><option>Malampa</option><option>Shefa</option><option>Tafea</option></select>
+<select id="category"><option value="">All categories</option><option>Building & Construction</option><option>Food & Agriculture</option><option>Retail & Shopping</option><option>Transport</option><option>Tourism & Accommodation</option><option>Arts & Handicrafts</option><option>Professional Services</option><option>Other Services</option></select></div></section>
+<p id="count" class="muted" aria-live="polite"></p><section id="businessGrid" class="grid"></section><div id="empty" class="panel" style="display:none;text-align:center"><h2>No approved listings yet</h2><p class="muted">Business listings will appear here after administrator approval.</p><a class="btn" href="register.html">Register a business</a></div>
+<div class="notice">Only listings approved by the Hub administrator appear in this public directory.</div></main>
+<footer><strong>Vanuatu Business Hub</strong><br>Connect · Trade · Grow<br>Connecting businesses across Torba, Sanma, Penama, Malampa, Shefa and Tafea.</footer>
+<script>
+const grid=document.getElementById('businessGrid'),empty=document.getElementById('empty'),count=document.getElementById('count');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function safeUrl(s){try{const u=new URL(s);return ['http:','https:'].includes(u.protocol)?u.href:'#'}catch{return '#'}}
+async function render(){
+ if(!window.vbhSupabaseReady()){count.textContent='Connect Supabase to display live approved listings.';empty.style.display='block';return;}
+ const client=window.supabase.createClient(window.VBH_SUPABASE_URL,window.VBH_SUPABASE_ANON_KEY);
+ let query=client.from('businesses').select('id,business_name,category,province,location,contact_name,phone,email,website,description').eq('status','Approved').order('created_at',{ascending:false});
+ const q=document.getElementById('search').value.trim(),p=document.getElementById('province').value,c=document.getElementById('category').value;
+ if(p)query=query.eq('province',p);if(c)query=query.eq('category',c);
+ if(q)query=query.or(`business_name.ilike.%${q.replace(/[,%()]/g,' ')}%,category.ilike.%${q.replace(/[,%()]/g,' ')}%,location.ilike.%${q.replace(/[,%()]/g,' ')}%,description.ilike.%${q.replace(/[,%()]/g,' ')}%`);
+ const {data,error}=await query;
+ if(error){count.textContent='Could not load listings: '+error.message;return;}
+ count.textContent=`${data.length} approved listing${data.length===1?'':'s'} found`;
+ grid.innerHTML=data.map(x=>`<article class="card"><h2>${esc(x.business_name)}</h2><p><strong>${esc(x.category)}</strong></p><p class="muted">📍 ${esc(x.location)} · ${esc(x.province)}</p><p>${esc(x.description)}</p><p><strong>Contact:</strong> ${esc(x.contact_name)}</p><p><a href="tel:${esc(x.phone)}">${esc(x.phone)}</a></p>${x.email?`<p><a href="mailto:${esc(x.email)}">${esc(x.email)}</a></p>`:''}${x.website?`<p><a href="${safeUrl(x.website)}" target="_blank" rel="noopener">Website / Facebook</a></p>`:''}</article>`).join('');
+ empty.style.display=data.length?'none':'block';
+}
+['search','province','category'].forEach(id=>document.getElementById(id).addEventListener('input',render));render();
+</script></body></html>
