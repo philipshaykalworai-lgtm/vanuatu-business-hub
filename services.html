@@ -1,0 +1,350 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the services and business opportunities offered through Vanuatu Business Hub.">
+  <title>Our Services | Vanuatu Business Hub</title>
+  <link rel="icon" type="image/webp" href="assets/Logo.webp">
+
+  <style>
+    :root {
+      --navy: #12304A;
+      --teal: #16A6A1;
+      --gold: #F2B544;
+      --cloud: #F5F8FA;
+      --ink: #203040;
+      --muted: #687887;
+      --line: #dfe7ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--cloud);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    .site-header {
+      background: white;
+      padding: 14px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--navy);
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    nav a:hover { color: var(--teal); }
+
+    .hero {
+      background: linear-gradient(120deg, #12304A, #176477);
+      color: white;
+      text-align: center;
+      padding: 85px 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      margin: 0 0 15px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 17px;
+      color: #e4f1f5;
+    }
+
+    .section {
+      max-width: 1150px;
+      margin: auto;
+      padding: 55px 22px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 28px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      box-shadow: 0 5px 18px rgba(18,48,74,.05);
+    }
+
+    .service-icon {
+      font-size: 35px;
+      margin-bottom: 12px;
+    }
+
+    .service-card h3 {
+      color: var(--navy);
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .highlight {
+      background: white;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .province-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .province-list span {
+      background: #e8f5f4;
+      color: var(--navy);
+      padding: 10px 17px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .cta {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 55px 20px;
+    }
+
+    .cta h2 { margin-top: 0; }
+
+    .cta p {
+      color: #e1ebf0;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 13px 23px;
+      border-radius: 7px;
+      font-weight: bold;
+      margin: 5px;
+    }
+
+    .btn:hover { background: white; }
+
+    footer {
+      background: #0d2437;
+      color: #d5e0e8;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+    }
+
+    @media(max-width: 650px) {
+      .site-header { justify-content: center; }
+      nav { justify-content: center; gap: 12px; }
+      .hero { padding: 65px 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img src="assets/Logo.webp" alt="Vanuatu Business Hub logo">
+    <span>
+      Vanuatu <b>Business Hub</b>
+      <small>Connect · Trade · Grow</small>
+    </span>
+  </a>
+
+  <nav aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="directory.html">Directory</a>
+    <a href="register.html">List Your Business</a>
+    <a href="admin-login.html">Admin</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Our Services</h1>
+  <p>
+    Connecting customers, businesses and service providers
+    across all six provinces of Vanuatu.
+  </p>
+</section>
+
+<main>
+
+  <section class="section">
+    <div class="section-heading">
+      <h2>What Vanuatu Business Hub Offers</h2>
+      <p>Helping local businesses become easier to find and connect with.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Free Business Listings</h3>
+        <p>
+          Local businesses can register and create a free business listing
+          to introduce their company, services and contact details.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🔎</div>
+        <h3>Business Directory</h3>
+        <p>
+          Customers can discover local businesses by name, category
+          and location, making it easier to find what they need.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🛍️</div>
+        <h3>Products Marketplace</h3>
+        <p>
+          A planned marketplace feature where participating businesses
+          can showcase products and help customers discover local goods.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🛠️</div>
+        <h3>Services Directory</h3>
+        <p>
+          Find local service providers across construction, transport,
+          tourism, repairs, professional services and other industries.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3>Business Connections</h3>
+        <p>
+          Help customers, suppliers and businesses find each other
+          and explore potential business opportunities.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>National Coverage</h3>
+        <p>
+          Our goal is to make businesses more visible throughout
+          Vanuatu, from major towns to smaller communities.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="highlight">
+    <div class="section">
+      <div class="section-heading">
+        <h2>One Hub. All Six Provinces.</h2>
+        <p>Supporting business visibility throughout Vanuatu.</p>
+      </div>
+
+      <div class="province-list">
+        <span>Torba</span>
+        <span>Sanma</span>
+        <span>Penama</span>
+        <span>Malampa</span>
+        <span>Shefa</span>
+        <span>Tafea</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Put Your Business on the Map</h2>
+    <p>
+      Join Vanuatu Business Hub and help more customers discover
+      your business.
+    </p>
+    <a class="btn" href="register.html">Register Your Business</a>
+    <a class="btn" href="directory.html">Explore Directory</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Vanuatu Business Hub. Connect · Trade · Grow.</p>
+  <p>Connecting businesses across Vanuatu.</p>
+</footer>
+
+</body>
+</html>
