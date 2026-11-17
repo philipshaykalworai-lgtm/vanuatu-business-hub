@@ -2,8 +2,8 @@
 // Supabase Dashboard > Project Settings > API.
 // It is safe to use the anon/public key in a browser ONLY with the RLS policies
 // in supabase-schema.sql enabled. NEVER put a service_role key in this file.
-window.VBH_SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
-window.VBH_SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_PUBLIC_KEY_HERE";
+window.VBH_SUPABASE_URL = "https://moigaiwpcmbwrkygeyig.supabase.co";
+window.VBH_SUPABASE_ANON_KEY = "sb_publishable_SOpZ8e4MxPnvf4ovpRVb2Q_a885QwIA";
 window.vbhSupabaseReady = function () {
   return window.supabase &&
     window.VBH_SUPABASE_URL.startsWith("https://") &&
