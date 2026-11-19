@@ -1,214 +1,31 @@
 
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore the services and business opportunities offered through Vanuatu Business Hub.">
-  <title>Our Services | Vanuatu Business Hub</title>
-  <link rel="icon" type="image/webp" href="assets/Logo.webp">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Vanuatu Business Hub connects customers with local businesses across all six provinces.">
+<title>Vanuatu Business Hub | Connect · Trade · Grow</title><link rel="icon" type="image/webp" href="assets/Logo.webp"><style>
+:root{--navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed}
+*{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:800;letter-spacing:.3px}.brand span{color:var(--gold)}
+nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700}nav a:hover{color:var(--gold)}
+main{max-width:1120px;margin:32px auto;padding:0 20px}h1,h2{color:var(--navy)}.muted{color:var(--muted);line-height:1.6}
+.panel,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 4px 14px #12304a0a}
+.btn,button{display:inline-block;border:0;border-radius:8px;padding:12px 16px;background:var(--teal);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+.btn.secondary{background:#eaf0f5;color:var(--navy)}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd7df;border-radius:8px;font:inherit;background:white}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:28px}
+.notice{background:#fff8e8;border-left:4px solid var(--gold);padding:13px;border-radius:8px;color:#6d531c;font-size:13px;line-height:1.5;margin:16px 0}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}header{align-items:flex-start}}
 
-  <style>
-    :root {
-      --navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--cloud);
-      color: var(--ink);
-      line-height: 1.6;
-    }
-
-    a { text-decoration: none; }
-
-    .site-header {
-      background: white;
-      padding: 14px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--navy);
-      font-size: 19px;
-      font-weight: bold;
-    }
-
-    .brand img {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: normal;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    nav a {
-      color: var(--navy);
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    nav a:hover { color: var(--teal); }
-
-    .hero {
-      background: linear-gradient(120deg, #12304A, #176477);
-      color: white;
-      text-align: center;
-      padding: 85px 20px;
-    }
-
-    .hero h1 {
-      font-size: clamp(30px, 5vw, 46px);
-      margin: 0 0 15px;
-    }
-
-    .hero p {
-      max-width: 700px;
-      margin: auto;
-      font-size: 17px;
-      color: #e4f1f5;
-    }
-
-    .section {
-      max-width: 1150px;
-      margin: auto;
-      padding: 55px 22px;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-heading h2 {
-      color: var(--navy);
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
-    }
-
-    .service-card {
-      background: white;
-      padding: 28px;
-      border-radius: 13px;
-      border: 1px solid var(--line);
-      box-shadow: 0 5px 18px rgba(18,48,74,.05);
-    }
-
-    .service-icon {
-      font-size: 35px;
-      margin-bottom: 12px;
-    }
-
-    .service-card h3 {
-      color: var(--navy);
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
-    .service-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .highlight {
-      background: white;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .province-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .province-list span {
-      background: #e8f5f4;
-      color: var(--navy);
-      padding: 10px 17px;
-      border-radius: 25px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .cta {
-      background: var(--navy);
-      color: white;
-      text-align: center;
-      padding: 55px 20px;
-    }
-
-    .cta h2 { margin-top: 0; }
-
-    .cta p {
-      color: #e1ebf0;
-      margin-bottom: 25px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--navy);
-      padding: 13px 23px;
-      border-radius: 7px;
-      font-weight: bold;
-      margin: 5px;
-    }
-
-    .btn:hover { background: white; }
-
-    footer {
-      background: #0d2437;
-      color: #d5e0e8;
-      text-align: center;
-      padding: 25px 15px;
-      font-size: 13px;
-    }
-
-    @media(max-width: 650px) {
-      .site-header { justify-content: center; }
-      nav { justify-content: center; gap: 12px; }
-      .hero { padding: 65px 18px; }
-    }
-  </style>
-</head>
-
+.site-header{background:var(--navy);color:#fff;padding:10px clamp(16px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;border-bottom:4px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-size:21px;font-weight:800;letter-spacing:.1px;line-height:1.12}
+.brand img{width:58px;height:58px;object-fit:contain;border-radius:50%;background:#fff;padding:2px}
+.brand b{color:#4fd0c6}.brand small{display:block;margin-top:5px;color:#f6c65d;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
+nav{display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 0}nav a:hover,nav a:focus{color:var(--gold)}
+.hero-logo{display:block;width:min(100%,820px);height:auto;margin:0 auto 18px;border-radius:12px;box-shadow:0 12px 35px #071d2b25}
+footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:var(--muted);font-size:12px;padding:26px 16px;line-height:1.7}
+@media(max-width:620px){.site-header{justify-content:center}.brand{width:100%;justify-content:center;font-size:18px}.brand img{width:50px;height:50px}nav{justify-content:center;width:100%;gap:14px}nav a{font-size:13px}}
+</style></head>
 <body>
 
 <header class="site-header">
