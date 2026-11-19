@@ -327,18 +327,13 @@ document.getElementById('province').addEventListener('change', render);
 document.getElementById('category').addEventListener('change', render);
 
 render();
-{
- if(!window.vbhSupabaseReady()){count.textContent='Connect Supabase to display live approved listings.';empty.style.display='block';return;}
- const client=window.supabase.createClient(window.VBH_SUPABASE_URL,window.VBH_SUPABASE_ANON_KEY);
- let query=client.from('businesses').select('id,business_name,category,province,location,contact_name,phone,email,website,description').eq('status','Approved').order('created_at',{ascending:false});
- const q=document.getElementById('search').value.trim(),p=document.getElementById('province').value,c=document.getElementById('category').value;
- if(p)query=query.eq('province',p);if(c)query=query.eq('category',c);
- if(q)query=query.or(`business_name.ilike.%${q.replace(/[,%()]/g,' ')}%,category.ilike.%${q.replace(/[,%()]/g,' ')}%,location.ilike.%${q.replace(/[,%()]/g,' ')}%,description.ilike.%${q.replace(/[,%()]/g,' ')}%`);
- const {data,error}=await query;
- if(error){count.textContent='Could not load listings: '+error.message;return;}
- count.textContent=`${data.length} approved listing${data.length===1?'':'s'} found`;
- grid.innerHTML=data.map(x=>`<article class="card"><h2>${esc(x.business_name)}</h2><p><strong>${esc(x.category)}</strong></p><p class="muted">📍 ${esc(x.location)} · ${esc(x.province)}</p><p>${esc(x.description)}</p><p><strong>Contact:</strong> ${esc(x.contact_name)}</p><p><a href="tel:${esc(x.phone)}">${esc(x.phone)}</a></p>${x.email?`<p><a href="mailto:${esc(x.email)}">${esc(x.email)}</a></p>`:''}${x.website?`<p><a href="${safeUrl(x.website)}" target="_blank" rel="noopener">Website / Facebook</a></p>`:''}</article>`).join('');
- empty.style.display=data.length?'none':'block';
-}
-['search','province','category'].forEach(id=>document.getElementById(id).addEventListener('input',render));render();
+document.getElementById('search').addEventListener('input', () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(render, 300);
+});
+
+document.getElementById('province').addEventListener('change', render);
+document.getElementById('category').addEventListener('change', render);
+
+render();;
 </script></body></html>
