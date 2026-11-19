@@ -1,112 +1,835 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Learn about Vanuatu Business Hub and our mission to connect businesses across Vanuatu.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Learn about Vanuatu Business Hub, our mission, vision and commitment to connecting businesses across all six provinces of Vanuatu.">
+
 <title>About Us | Vanuatu Business Hub</title>
+
 <link rel="icon" type="image/webp" href="assets/Logo.webp">
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{
---navy:#12304A;
---teal:#16A6A1;
---gold:#F2B544;
---cloud:#F5F8FA;
---ink:#203040;
---muted:#687887;
---line:#dfe7ed;
+:root {
+  --navy: #12304A;
+  --orange: #F5A623;
+  --teal: #43D5C5;
+  --light: #F4F7FA;
+  --white: #FFFFFF;
+  --text: #344054;
+  --muted: #667085;
+  --line: #E5EAF0;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
-header{background:var(--navy);color:white;padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:4px solid var(--gold)}
-.brand{display:flex;align-items:center;gap:12px;color:white;text-decoration:none;font-size:21px;font-weight:800}
-.brand img{width:58px;height:58px;object-fit:contain;background:white;border-radius:50%;padding:2px}
-.brand b{color:#4fd0c6}
-.brand small{display:block;color:#f6c65d;font-size:10px;margin-top:5px}
-nav{display:flex;gap:18px;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-size:14px;font-weight:bold}
-nav a:hover{color:var(--gold)}
-main{max-width:1100px;margin:40px auto;padding:0 20px}
-h1,h2{color:var(--navy)}
-.hero{text-align:center;background:linear-gradient(120deg,#12304A,#18516a);color:white;padding:65px 20px}
-.hero h1{color:white;font-size:clamp(30px,5vw,46px)}
-.hero p{max-width:750px;margin:auto;line-height:1.8}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}
-.card{background:white;border:1px solid var(--line);border-radius:14px;padding:23px}
-.card h3{color:var(--navy)}
-.provinces{background:white;padding:25px;border-radius:14px;border:1px solid var(--line);margin-top:25px}
-footer{text-align:center;background:white;border-top:1px solid var(--line);padding:28px;color:var(--muted);font-size:13px;line-height:1.8}
-@media(max-width:650px){
-header{justify-content:center}
-.brand{justify-content:center}
-nav{justify-content:center}
-.grid{grid-template-columns:1fr}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text);
+  background: white;
+  line-height: 1.7;
+}
+
+.container {
+  width: 90%;
+  max-width: 1180px;
+  margin: auto;
+}
+
+/* HEADER */
+
+header {
+  background: var(--navy);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 4px solid var(--orange);
+}
+
+.navbar {
+  width: 92%;
+  max-width: 1237px;
+  min-height: 77px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: white;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand-name .vanuatu {
+  color: var(--orange);
+}
+
+.brand-name .hub {
+  color: var(--teal);
+}
+
+.tagline {
+  color: var(--orange);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  margin-top: 5px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: color .2s;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--orange);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+  background: linear-gradient(
+    120deg,
+    rgba(18,48,74,.97),
+    rgba(18,48,74,.83)
+  );
+  color: white;
+  padding: 95px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 15px;
+  color: white;
+}
+
+.hero h1 span {
+  color: var(--orange);
+}
+
+.hero p {
+  max-width: 750px;
+  margin: auto;
+  color: #E5EAF0;
+  font-size: 17px;
+}
+
+/* GENERAL SECTIONS */
+
+.section {
+  padding: 75px 0;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-heading h2 {
+  color: var(--navy);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.section-heading p {
+  max-width: 750px;
+  margin: auto;
+  color: var(--muted);
+}
+
+/* WHO WE ARE */
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.intro-content h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--navy);
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.intro-content p {
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+.intro-highlight {
+  background: var(--navy);
+  color: white;
+  padding: 35px;
+  border-radius: 14px;
+  border-left: 5px solid var(--orange);
+}
+
+.intro-highlight h3 {
+  color: var(--orange);
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 15px;
+}
+
+.intro-highlight p {
+  color: #E5EAF0;
+}
+
+/* MISSION AND VISION */
+
+.values-section {
+  background: var(--light);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.value-card {
+  background: white;
+  padding: 35px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(18,48,74,.05);
+}
+
+.value-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF3DA;
+  border-radius: 12px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--navy);
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+.value-card p {
+  color: var(--muted);
+}
+
+/* CONNECT TRADE GROW */
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.pillar-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 5px 20px rgba(18,48,74,.05);
+  transition: .25s;
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(18,48,74,.12);
+}
+
+.pillar-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF3DA;
+  border-radius: 12px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.pillar-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--navy);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.pillar-card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* PROVINCES */
+
+.provinces-section {
+  background: var(--light);
+}
+
+.provinces-box {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.provinces-box h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--navy);
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.provinces-box p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.province-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.province {
+  background: var(--navy);
+  color: white;
+  padding: 17px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.province span {
+  color: var(--orange);
+}
+
+/* CTA */
+
+.cta {
+  background: var(--navy);
+  color: white;
+  padding: 65px 20px;
+  text-align: center;
+}
+
+.cta h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.cta p {
+  color: #E5EAF0;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--navy);
+  padding: 13px 25px;
+  margin: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: .2s;
+}
+
+.btn:hover {
+  background: #FFD078;
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+
+footer {
+  background: #0B2033;
+  color: #D5DEE7;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer a {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* TABLET */
+
+@media(max-width: 850px) {
+  nav {
+    gap: 13px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width: 650px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 9px 0;
+  }
+
+  .brand-name {
+    font-size: 17px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 5px 0;
+  }
+
+  .values-grid,
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .province-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    padding: 70px 20px;
+  }
+
+  .section {
+    padding: 55px 0;
+  }
+
+  .section-heading h2,
+  .intro-content h2 {
+    font-size: 25px;
+  }
+
+  .provinces-box {
+    padding: 25px 18px;
+  }
+
+  .cta h2 {
+    font-size: 25px;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<!-- HEADER -->
+
 <header>
-<a class="brand" href="index.html">
-<img src="assets/Logo.webp" alt="Vanuatu Business Hub logo">
-<span>Vanuatu <b>Business Hub</b>
-<small>Connect · Trade · Grow</small></span>
-</a>
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="services.html">Services</a>
-<a href="directory.html">Directory</a>
-<a href="register.html">Register</a>
-<a href="admin-login.html">Admin</a>
-</nav>
+  <div class="navbar">
+
+    <a href="index.html" class="logo">
+      <img src="assets/Logo.webp" alt="Vanuatu Business Hub">
+
+      <div class="brand-text">
+        <div class="brand-name">
+          <span class="vanuatu">Vanuatu</span>
+          <span class="hub">Business Hub</span>
+        </div>
+
+        <div class="tagline">
+          CONNECT · TRADE · GROW
+        </div>
+      </div>
+    </a>
+
+    <button class="menu-toggle"
+      id="menuToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">
+      ☰
+    </button>
+
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="services.html">Services</a>
+      <a href="directory.html">Directory</a>
+      <a href="register.html">Register</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+
+  </div>
 </header>
 
+<!-- HERO -->
+
 <section class="hero">
-<h1>About Vanuatu Business Hub</h1>
-<p>Connecting Vanuatu businesses. Creating opportunities. Supporting local enterprise.</p>
+  <div class="container">
+
+    <h1>About <span>Vanuatu Business Hub</span></h1>
+
+    <p>
+      Connecting Vanuatu businesses. Creating opportunities.
+      Supporting local enterprise across all six provinces.
+    </p>
+
+  </div>
 </section>
 
-<main>
-<h2>Who We Are</h2>
-<p>Vanuatu Business Hub is an online business marketplace designed to connect customers, businesses, suppliers and service providers throughout Vanuatu.</p>
+<!-- WHO WE ARE -->
 
-<p>Our platform provides local businesses with an opportunity to introduce their products and services, increase their visibility and reach potential customers.</p>
+<section class="section">
+  <div class="container">
 
-<h2>Our Mission</h2>
-<p>To make it easier for people to discover local businesses and help Vanuatu businesses grow through digital connections and opportunities.</p>
+    <div class="intro-grid">
 
-<h2>Our Vision</h2>
-<p>To become a trusted online business directory and marketplace connecting communities and businesses across all six provinces of Vanuatu.</p>
+      <div class="intro-content">
 
-<div class="grid">
-<div class="card">
-<h3>Connect</h3>
-<p>Bring customers and local businesses together.</p>
-</div>
-<div class="card">
-<h3>Trade</h3>
-<p>Help people discover products and services available locally.</p>
-</div>
-<div class="card">
-<h3>Grow</h3>
-<p>Give businesses greater visibility and opportunities.</p>
-</div>
-</div>
+        <h2>Who We Are</h2>
 
-<div class="provinces">
-<h2>Serving All Six Provinces</h2>
-<p>Torba · Sanma · Penama · Malampa · Shefa · Tafea</p>
-<p>Our goal is to make business discovery easier throughout Vanuatu, from the northern islands to the southern provinces.</p>
-</div>
-</main>
+        <p>
+          Vanuatu Business Hub is an online business marketplace
+          designed to connect customers, businesses, suppliers
+          and service providers throughout Vanuatu.
+        </p>
+
+        <p>
+          Our platform provides local businesses with an opportunity
+          to introduce their products and services, increase their
+          visibility and reach potential customers.
+        </p>
+
+        <p>
+          We aim to make it easier for people to discover local
+          businesses and support the growth of enterprise in
+          communities throughout Vanuatu.
+        </p>
+
+      </div>
+
+      <div class="intro-highlight">
+
+        <h3>Connecting Vanuatu</h3>
+
+        <p>
+          One platform bringing together customers, entrepreneurs,
+          suppliers and service providers to create stronger
+          business connections and opportunities.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- MISSION AND VISION -->
+
+<section class="section values-section">
+  <div class="container">
+
+    <div class="section-heading">
+
+      <h2>Our Mission & Vision</h2>
+
+      <p>
+        Our purpose is to make business connections easier
+        and create opportunities for local enterprise.
+      </p>
+
+    </div>
+
+    <div class="values-grid">
+
+      <div class="value-card">
+
+        <div class="value-icon">🎯</div>
+
+        <h3>Our Mission</h3>
+
+        <p>
+          To make it easier for people to discover local businesses
+          and help Vanuatu businesses grow through digital
+          connections and opportunities.
+        </p>
+
+      </div>
+
+      <div class="value-card">
+
+        <div class="value-icon">🌏</div>
+
+        <h3>Our Vision</h3>
+
+        <p>
+          To become a trusted online business directory and
+          marketplace connecting communities and businesses
+          across all six provinces of Vanuatu.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CONNECT TRADE GROW -->
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-heading">
+
+      <h2>Connect · Trade · Grow</h2>
+
+      <p>
+        Three important ideas guide the purpose of
+        Vanuatu Business Hub.
+      </p>
+
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-card">
+
+        <div class="pillar-icon">🤝</div>
+
+        <h3>Connect</h3>
+
+        <p>
+          Bring customers, suppliers and local businesses
+          together through an accessible online platform.
+        </p>
+
+      </div>
+
+      <div class="pillar-card">
+
+        <div class="pillar-icon">🛍️</div>
+
+        <h3>Trade</h3>
+
+        <p>
+          Help people discover products and services
+          available from businesses throughout Vanuatu.
+        </p>
+
+      </div>
+
+      <div class="pillar-card">
+
+        <div class="pillar-icon">📈</div>
+
+        <h3>Grow</h3>
+
+        <p>
+          Give businesses greater visibility and opportunities
+          to reach potential customers and build connections.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- SIX PROVINCES -->
+
+<section class="section provinces-section">
+  <div class="container">
+
+    <div class="provinces-box">
+
+      <h2>Serving All Six Provinces</h2>
+
+      <p>
+        Our goal is to make business discovery easier throughout
+        Vanuatu, from the northern islands to the southern provinces.
+      </p>
+
+      <div class="province-grid">
+
+        <div class="province"><span>01.</span> Torba</div>
+        <div class="province"><span>02.</span> Sanma</div>
+        <div class="province"><span>03.</span> Penama</div>
+        <div class="province"><span>04.</span> Malampa</div>
+        <div class="province"><span>05.</span> Shefa</div>
+        <div class="province"><span>06.</span> Tafea</div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+
+<section class="cta">
+  <div class="container">
+
+    <h2>Be Part of Vanuatu Business Hub</h2>
+
+    <p>
+      Register your business and connect with customers
+      and opportunities throughout Vanuatu.
+    </p>
+
+    <a href="register.html" class="btn">
+      Register Your Business
+    </a>
+
+    <a href="directory.html" class="btn">
+      Explore Directory
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-<strong>Vanuatu Business Hub</strong><br>
-Connect · Trade · Grow<br>
-Connecting businesses across Vanuatu.
+  <div class="container">
+
+    <p><strong>Vanuatu Business Hub</strong></p>
+
+    <p>CONNECT · TRADE · GROW</p>
+
+    <p>Connecting businesses across Vanuatu.</p>
+
+    <p>
+      © <span id="year"></span> Vanuatu Business Hub.
+      All Rights Reserved.
+    </p>
+
+    <p>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="services.html">Services</a> |
+      <a href="directory.html">Directory</a>
+    </p>
+
+  </div>
 </footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
+menuToggle.addEventListener("click", function() {
+
+  const isOpen = mainNav.classList.toggle("open");
+
+  menuToggle.setAttribute("aria-expanded", isOpen);
+
+});
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
 </body>
 </html>
