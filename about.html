@@ -46,6 +46,9 @@ body {
 
 /* HEADER */
 
+
+/* STANDARD WEBSITE HEADER */
+
 header {
   background: var(--navy);
   color: white;
@@ -53,23 +56,19 @@ header {
   top: 0;
   z-index: 1000;
   border-bottom: 4px solid var(--orange);
-}
-
-.navbar {
-  width: 92%;
-  max-width: 1237px;
-  min-height: 77px;
-  margin: auto;
+  padding: 10px clamp(16px, 4vw, 56px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
+  color: white;
   text-decoration: none;
 }
 
@@ -78,8 +77,8 @@ header {
   height: 58px;
   object-fit: contain;
   border-radius: 50%;
-  border: 2px solid white;
   background: white;
+  padding: 2px;
 }
 
 .brand-text {
@@ -105,7 +104,6 @@ header {
 
 .tagline {
   color: var(--orange);
-  font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.3px;
@@ -115,18 +113,20 @@ header {
 nav {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: clamp(10px, 2vw, 22px);
+  flex-wrap: wrap;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  transition: color .2s;
+  padding: 9px 0;
 }
 
 nav a:hover,
+nav a:focus,
 nav a.active {
   color: var(--orange);
 }
@@ -141,6 +141,43 @@ nav a.active {
   font-size: 20px;
   cursor: pointer;
 }
+
+@media(max-width: 650px) {
+  header {
+    padding: 10px 16px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 7px 0;
+  }
+}
+
 
 /* HERO */
 
