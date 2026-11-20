@@ -45,11 +45,8 @@ body {
 }
 
 /* HEADER */
-header {
-  position: relative;
-}
 
-/* STANDARD WEBSITE HEADER */
+/* HEADER */
 
 header {
   background: var(--navy);
@@ -59,21 +56,18 @@ header {
   z-index: 1000;
   border-bottom: 4px solid var(--orange);
   padding: 10px clamp(16px, 4vw, 56px);
- display: flex;
-align-items: center;
-justify-content: space-between;
-width: 100%;
-  gap: 18px;
-  flex-wrap: wrap;
+  width: 100%;
 }
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  position: relative;
   gap: 18px;
+  position: relative;
 }
+
 .logo {
   display: flex;
   align-items: center;
@@ -151,9 +145,16 @@ nav a.active {
   font-size: 20px;
   cursor: pointer;
 }
-@media(max-width: 650px) {
+
+/* MOBILE HEADER */
+
+@media (max-width: 650px) {
   header {
     padding: 10px 16px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
   }
 
   .brand-name {
@@ -164,13 +165,16 @@ nav a.active {
     width: 50px;
     height: 50px;
   }
- 
+
   .menu-toggle {
     display: block;
+    margin-left: auto;
+    order: 2;
   }
 
   nav {
     display: none;
+    order: 3;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
@@ -186,6 +190,7 @@ nav a.active {
     padding: 7px 0;
   }
 }
+
 
 
 /* HERO */
@@ -493,9 +498,6 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
-
-/* MOBILE */
-
 
 /* MOBILE */
 
