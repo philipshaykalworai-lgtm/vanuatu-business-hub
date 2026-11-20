@@ -144,6 +144,12 @@ async function render(){
       <td>${esc(x.status)}</td>
       <td>
         <button class="btn secondary" data-edit="${esc(x.id)}">Edit</button>
+        <button
+  style="background:#c0392b"
+  data-delete="${esc(x.id)}"
+  data-name="${esc(x.business_name)}">
+  Delete
+</button>
         ${String(x.status).toLowerCase()==='pending'
           ? `<button data-id="${esc(x.id)}" data-status="approved">Approve</button>
              <button style="background:#a33" data-id="${esc(x.id)}" data-status="rejected">Reject</button>`
@@ -158,6 +164,11 @@ async function render(){
       openEditor(all.find(x=>String(x.id)===btn.dataset.edit));
     });
   });
+  $('rows').querySelectorAll('[data-delete]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    deleteBusiness(btn.dataset.delete,btn.dataset.name);
+  });
+});
 
   $('rows').querySelectorAll('[data-id]').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -240,6 +251,35 @@ async function setStatus(id,status){
   if(error){
     alert('Update failed: '+error.message);
     return;
+  }
+
+  await render();
+}
+
+async function deleteBusiness(id,name){
+
+  const confirmed=confirm(
+    'Are you sure you want to permanently delete "'+
+    name+'"? This action cannot be undone.'
+  );
+
+  if(!confirmed)return;
+
+  const {error}=await client
+    .from('businesses')
+    .delete()
+    .eq('id',id);
+
+  if(error){
+    alert('Unable to delete business: '+error.message);
+    return;
+  }
+
+  alert('Business successfully deleted.');
+
+  if(editingId===id){
+    editingId=null;
+    $('editPanel').style.display='none';
   }
 
   await render();
