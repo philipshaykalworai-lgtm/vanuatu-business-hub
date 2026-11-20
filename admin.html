@@ -122,10 +122,7 @@ async function render(){
   const q=$('search').value.toLowerCase();
   const p=$('province').value;
   const s=$('status').value.toLowerCase();
-
- data-status="Approved"
-data-status="Rejected"
-data-status="Pending"
+  
   const shown=all.filter(x=>
     (!p||x.province===p)&&
     (!s||String(x.status).toLowerCase()===s)&&
