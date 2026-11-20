@@ -25,21 +25,44 @@ nav{display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap}nav 
 footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:var(--muted);font-size:12px;padding:26px 16px;line-height:1.7}
 @media(max-width:620px){.site-header{justify-content:center}.brand{width:100%;justify-content:center;font-size:18px}.brand img{width:50px;height:50px}nav{justify-content:center;width:100%;gap:14px}nav a{font-size:13px}}
 </style></head><body>
-<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
-<button class="menu-toggle"
+
+<header>
+  <div class="navbar">
+
+    <a href="index.html" class="logo">
+      <img src="assets/Logo.webp" alt="Vanuatu Business Hub">
+
+      <div class="brand-text">
+        <div class="brand-name">
+          <span class="vanuatu">Vanuatu</span>
+          <span class="hub">Business Hub</span>
+        </div>
+
+        <div class="tagline">
+          CONNECT · TRADE · GROW
+        </div>
+      </div>
+    </a>
+
+    <button class="menu-toggle"
       id="menuToggle"
       aria-label="Toggle navigation"
       aria-expanded="false">
       ☰
     </button>
-  <nav aria-label="Main navigation">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="directory.html">Directory</a>
-  <a href="register.html">Register</a>
-  <a href="admin-login.html">Admin</a>
-</nav></header>
+
+    <nav id="mainNav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="directory.html">Directory</a>
+      <a href="register.html">Register</a>
+      <a href="admin-login.html">Admin</a>
+    </nav>
+
+  </div>
+</header>
+
 
 <section style="background:linear-gradient(120deg,#12304A,#18516a);color:white;padding:42px 20px 64px;text-align:center">
 <img class="hero-logo" src="assets/vanuatu-business-hub-banner.jpg" alt="vanuatu-business-hub-banner">
