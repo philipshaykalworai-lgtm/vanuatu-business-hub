@@ -40,7 +40,54 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 <div class="stat"><small>Total</small><h2 id="total">0</h2></div><div class="stat"><small>Pending</small><h2 id="pending">0</h2></div><div class="stat"><small>Approved</small><h2 id="approved">0</h2></div><div class="stat"><small>Rejected</small><h2 id="rejected">0</h2></div></section>
 <section class="panel"><div class="grid" style="grid-template-columns:2fr 1fr 1fr"><input id="search" placeholder="Search business or contact"><select id="province"><option value="">All provinces</option><option>Torba</option><option>Sanma</option><option>Penama</option><option>Malampa</option><option>Shefa</option><option>Tafea</option></select><select id="status"><option value="">All statuses</option><option>Pending</option><option>Approved</option><option>Rejected</option></select></div>
 <div style="overflow-x:auto;margin-top:18px"><table style="width:100%;border-collapse:collapse;min-width:800px"><thead><tr><th>Business</th><th>Category</th><th>Province</th><th>Contact</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div><p id="empty" class="muted" style="display:none">No matching submissions.</p></section>
-<div class="notice">Administrator actions are controlled by Supabase authentication and database permissions. Keep your account credentials private.</div>
+
+<section class="panel" id="editPanel" style="display:none;margin-top:20px">
+  <h2>Edit Business Details</h2>
+  <p class="muted">Update the business information below.</p>
+
+  <form id="editForm">
+    <label>Business Name</label>
+    <input id="editName" required>
+
+    <label>Category</label>
+    <input id="editCategory" required>
+
+    <label>Province</label>
+    <select id="editProvince" required>
+      <option value="">Select province</option>
+      <option>Torba</option>
+      <option>Sanma</option>
+      <option>Penama</option>
+      <option>Malampa</option>
+      <option>Shefa</option>
+      <option>Tafea</option>
+    </select>
+
+    <label>Location</label>
+    <input id="editLocation">
+
+    <label>Contact Name</label>
+    <input id="editContact">
+
+    <label>Phone</label>
+    <input id="editPhone">
+
+    <label>Email</label>
+    <input id="editEmail" type="email">
+
+    <label>Website</label>
+    <input id="editWebsite">
+
+    <label>Description</label>
+    <textarea id="editDescription" rows="4"></textarea>
+
+    <button type="submit">Save Changes</button>
+    <button type="button" id="cancelEdit" style="background:#687887">Cancel</button>
+  </form>
+  <p id="editMessage" class="muted"></p>
+</section>
+
+  <div class="notice">Administrator actions are controlled by Supabase authentication and database permissions. Keep your account credentials private.</div>
 <a class="btn secondary" href="directory.html">View public directory</a> </main>
 <footer><strong>Vanuatu Business Hub</strong><br>Connect · Trade · Grow<br>Connecting businesses across Torba, Sanma, Penama, Malampa, Shefa and Tafea.</footer>
 <script>
@@ -57,16 +104,147 @@ async function init(){
  $('logoutBtn').addEventListener('click',async()=>{await client.auth.signOut();location.href='admin-login.html';});
  ['search','province','status'].forEach(id=>$(id).addEventListener('input',render));await render();
 }
+
+let editingId = null;
+
 async function render(){
- let query=client.from('businesses').select('*').order('created_at',{ascending:false});
- const {data:all,error}=await query;if(error){$('empty').textContent='Unable to load submissions.';$('empty').style.display='block';return;}
- const q=$('search').value.toLowerCase(),p=$('province').value,s=$('status').value;
- $('total').textContent=all.length;$('pending').textContent=all.filter(x=>x.status==='Pending').length;$('approved').textContent=all.filter(x=>x.status==='Approved').length;$('rejected').textContent=all.filter(x=>x.status==='Rejected').length;
- const shown=all.filter(x=>(!p||x.province===p)&&(!s||x.status===s)&&(!q||[x.business_name,x.contact_name,x.phone,x.location].join(' ').toLowerCase().includes(q)));
- $('rows').innerHTML=shown.map(x=>`<tr><td>${esc(x.business_name)}<br><small>${esc(x.location)}</small></td><td>${esc(x.category)}</td><td>${esc(x.province)}</td><td>${esc(x.contact_name)}<br>${esc(x.phone)}</td><td>${esc(x.status)}</td><td>${x.status==='Pending'?`<button data-id="${x.id}" data-status="Approved">Approve</button> <button style="background:#a33" data-id="${x.id}" data-status="Rejected">Reject</button>`:`<button class="btn secondary" data-id="${x.id}" data-status="Pending">Set pending</button>`}</td></tr>`).join('');
- $('rows').querySelectorAll('button[data-id]').forEach(btn=>btn.addEventListener('click',()=>setStatus(btn.dataset.id,btn.dataset.status)));
- $('empty').style.display=shown.length?'none':'block';
+  const {data:all,error} = await client
+    .from('businesses')
+    .select('*')
+    .order('created_at',{ascending:false});
+
+  if(error){
+    $('empty').textContent='Unable to load submissions: '+error.message;
+    $('empty').style.display='block';
+    return;
+  }
+
+  const q=$('search').value.toLowerCase();
+  const p=$('province').value;
+  const s=$('status').value.toLowerCase();
+
+  $('total').textContent=all.length;
+  $('pending').textContent=all.filter(x=>String(x.status).toLowerCase()==='pending').length;
+  $('approved').textContent=all.filter(x=>String(x.status).toLowerCase()==='approved').length;
+  $('rejected').textContent=all.filter(x=>String(x.status).toLowerCase()==='rejected').length;
+
+  const shown=all.filter(x=>
+    (!p||x.province===p)&&
+    (!s||String(x.status).toLowerCase()===s)&&
+    (!q||[x.business_name,x.contact_name,x.phone,x.location]
+      .join(' ').toLowerCase().includes(q))
+  );
+
+  $('rows').innerHTML=shown.map(x=>`
+    <tr>
+      <td>${esc(x.business_name)}<br><small>${esc(x.location)}</small></td>
+      <td>${esc(x.category)}</td>
+      <td>${esc(x.province)}</td>
+      <td>${esc(x.contact_name)}<br>${esc(x.phone)}</td>
+      <td>${esc(x.status)}</td>
+      <td>
+        <button class="btn secondary" data-edit="${esc(x.id)}">Edit</button>
+        ${String(x.status).toLowerCase()==='pending'
+          ? `<button data-id="${esc(x.id)}" data-status="approved">Approve</button>
+             <button style="background:#a33" data-id="${esc(x.id)}" data-status="rejected">Reject</button>`
+          : `<button class="btn secondary" data-id="${esc(x.id)}" data-status="pending">Set pending</button>`
+        }
+      </td>
+    </tr>
+  `).join('');
+
+  $('rows').querySelectorAll('[data-edit]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      openEditor(all.find(x=>String(x.id)===btn.dataset.edit));
+    });
+  });
+
+  $('rows').querySelectorAll('[data-id]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      setStatus(btn.dataset.id,btn.dataset.status);
+    });
+  });
+
+  $('empty').style.display=shown.length?'none':'block';
 }
-async function setStatus(id,status){const {error}=await client.from('businesses').update({status}).eq('id',id);if(error){alert('Update failed. Check administrator permissions.');return;}await render();}
+
+function openEditor(business){
+  if(!business)return;
+
+  editingId=business.id;
+
+  $('editName').value=business.business_name||'';
+  $('editCategory').value=business.category||'';
+  $('editProvince').value=business.province||'';
+  $('editLocation').value=business.location||'';
+  $('editContact').value=business.contact_name||'';
+  $('editPhone').value=business.phone||'';
+  $('editEmail').value=business.email||'';
+  $('editWebsite').value=business.website||'';
+  $('editDescription').value=business.description||'';
+
+  $('editMessage').textContent='';
+  $('editPanel').style.display='block';
+  $('editPanel').scrollIntoView({behavior:'smooth'});
+}
+
+$('editForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+
+  if(!editingId)return;
+
+  $('editMessage').textContent='Saving changes...';
+
+  const changes={
+    business_name:$('editName').value.trim(),
+    category:$('editCategory').value.trim(),
+    province:$('editProvince').value,
+    location:$('editLocation').value.trim(),
+    contact_name:$('editContact').value.trim(),
+    phone:$('editPhone').value.trim(),
+    email:$('editEmail').value.trim(),
+    website:$('editWebsite').value.trim(),
+    description:$('editDescription').value.trim()
+  };
+
+  const {error}=await client
+    .from('businesses')
+    .update(changes)
+    .eq('id',editingId);
+
+  if(error){
+    $('editMessage').textContent='Update failed: '+error.message;
+    return;
+  }
+
+  $('editMessage').textContent='Business updated successfully!';
+
+  editingId=null;
+  $('editPanel').style.display='none';
+
+  await render();
+});
+
+$('cancelEdit').addEventListener('click',()=>{
+  editingId=null;
+  $('editPanel').style.display='none';
+  $('editMessage').textContent='';
+});
+
+async function setStatus(id,status){
+  const {error}=await client
+    .from('businesses')
+    .update({status})
+    .eq('id',id);
+
+  if(error){
+    alert('Update failed: '+error.message);
+    return;
+  }
+
+  await render();
+}
+
 init();
+
 </script></body></html>
