@@ -133,7 +133,8 @@ data-status="Pending"
       .join(' ').toLowerCase().includes(q))
   );
 
-  $('rows').innerHTML=shown.map(x=>`
+  
+$('rows').innerHTML=shown.map(x=>`
     <tr>
       <td>${esc(x.business_name)}<br><small>${esc(x.location)}</small></td>
       <td>${esc(x.category)}</td>
@@ -143,19 +144,20 @@ data-status="Pending"
       <td>
         <button class="btn secondary" data-edit="${esc(x.id)}">Edit</button>
         <button
-  style="background:#c0392b"
-  data-delete="${esc(x.id)}"
-  data-name="${esc(x.business_name)}">
-  Delete
-</button>
+          style="background:#c0392b"
+          data-delete="${esc(x.id)}"
+          data-name="${esc(x.business_name)}">
+          Delete
+        </button>
         ${String(x.status).toLowerCase()==='pending'
-          ? `<button data-id="${esc(x.id)}" data-status="approved">Approve</button>
-             <button style="background:#a33" data-id="${esc(x.id)}" data-status="rejected">Reject</button>`
-          : `<button class="btn secondary" data-id="${esc(x.id)}" data-status="pending">Set pending</button>`
+          ? `<button data-id="${esc(x.id)}" data-status="Approved">Approve</button>
+             <button style="background:#a33" data-id="${esc(x.id)}" data-status="Rejected">Reject</button>`
+          : `<button class="btn secondary" data-id="${esc(x.id)}" data-status="Pending">Set pending</button>`
         }
       </td>
     </tr>
   `).join('');
+
 
   $('rows').querySelectorAll('[data-edit]').forEach(btn=>{
     btn.addEventListener('click',()=>{
