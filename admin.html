@@ -123,11 +123,9 @@ async function render(){
   const p=$('province').value;
   const s=$('status').value.toLowerCase();
 
-  $('total').textContent=all.length;
-  $('pending').textContent=all.filter(x=>String(x.status).toLowerCase()==='pending').length;
-  $('approved').textContent=all.filter(x=>String(x.status).toLowerCase()==='approved').length;
-  $('rejected').textContent=all.filter(x=>String(x.status).toLowerCase()==='rejected').length;
-
+ data-status="Approved"
+data-status="Rejected"
+data-status="Pending"
   const shown=all.filter(x=>
     (!p||x.province===p)&&
     (!s||String(x.status).toLowerCase()===s)&&
@@ -242,18 +240,18 @@ $('cancelEdit').addEventListener('click',()=>{
   $('editMessage').textContent='';
 });
 
-async function setStatus(id,status){
-  const {error}=await client
-    .from('businesses')
-    .update({status})
-    .eq('id',id);
+async function setStatus(id, status) {
+    const { error } = await client
+        .from('businesses')
+        .update({ status: status })
+        .eq('id', id);
 
-  if(error){
-    alert('Update failed: '+error.message);
-    return;
-  }
+    if (error) {
+        alert('Update failed: ' + error.message);
+        return;
+    }
 
-  await render();
+    await render();
 }
 
 async function deleteBusiness(id,name){
