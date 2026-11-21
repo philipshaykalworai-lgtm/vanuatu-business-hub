@@ -237,4 +237,17 @@ form.addEventListener('submit',async e=>{
  if(error){msg.textContent='Submission could not be completed: '+error.message;return;}
  msg.textContent='Thank you. Your business has been submitted and is awaiting administrator review.';form.reset();
 });
+  const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
+menuToggle.addEventListener("click", function() {
+
+  const isOpen = mainNav.classList.toggle("open");
+
+  menuToggle.setAttribute("aria-expanded", isOpen);
+
+});
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
 </script></body></html>
