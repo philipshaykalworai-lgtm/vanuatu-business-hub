@@ -111,7 +111,142 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
     grid-template-columns: 1fr;
   }
 }
+/* COMMON NAVIGATION HEADER */
 
+header {
+  background: var(--navy);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 4px solid var(--gold);
+  padding: 10px clamp(16px, 4vw, 56px);
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 18px;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  padding: 2px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  font-size: 21px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand-name .vanuatu {
+  color: var(--gold);
+}
+
+.brand-name .hub {
+  color: #4fd0c6;
+}
+
+.tagline {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  margin-top: 5px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 22px);
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 0;
+}
+
+nav a:hover,
+nav a:focus,
+nav a.active {
+  color: var(--gold);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  header {
+    padding: 10px 16px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    order: 2;
+  }
+
+  nav {
+    display: none;
+    order: 3;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  nav.open {
+    display: flex;
+  }
+}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 
 <header>
