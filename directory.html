@@ -113,21 +113,43 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 }
 
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
-<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
-<button class="menu-toggle"
+
+<header>
+  <div class="navbar">
+
+    <a href="index.html" class="logo">
+      <img src="assets/Logo.webp" alt="Vanuatu Business Hub">
+
+      <div class="brand-text">
+        <div class="brand-name">
+          <span class="vanuatu">Vanuatu</span>
+          <span class="hub">Business Hub</span>
+        </div>
+
+        <div class="tagline">
+          CONNECT · TRADE · GROW
+        </div>
+      </div>
+    </a>
+
+    <button class="menu-toggle"
       id="menuToggle"
       aria-label="Toggle navigation"
       aria-expanded="false">
       ☰
     </button>
-  <nav aria-label="Main navigation">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="directory.html">Directory</a>
-  <a href="register.html">Register</a>
-  <a href="admin-login.html">Admin</a>
-</nav></header>
+
+    <nav id="mainNav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="directory.html" class="active">Directory</a>
+      <a href="register.html">Register</a>
+      <a href="admin-login.html">Admin</a>
+    </nav>
+
+  </div>
+</header>
 
 <section class="directory-hero"><h1>Find Local Businesses Across Vanuatu</h1><p>Search approved business listings by name, service, category or province.</p></section>
 <main>
