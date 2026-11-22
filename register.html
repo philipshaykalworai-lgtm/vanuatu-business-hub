@@ -222,7 +222,13 @@ nav a.active {
 <div id="formMessage" role="status" style="margin-top:14px"></div></form>
 <div class="notice">Your submission is sent securely to the Hub database for administrator review. Only approved business information is displayed publicly.</div>
 </section><aside class="registration-visual" aria-label="Vanuatu destinations and culture"><img src="assets/gettyimages-sb10068511b-001-612x612.jpg" alt="gettyimages-sb10068511b-001-612x612"><div class="visual-message"><span class="visual-kicker">Made for Vanuatu</span><h2>Showcase Your Business.<br>Connect with Vanuatu.</h2><p>Grow together with customers and communities across all six provinces.</p></div></aside></div></main>
-<footer><strong>Vanuatu Business Hub</strong><br>Connect · Trade · Grow<br>Connecting businesses across Torba, Sanma, Penama, Malampa, Shefa and Tafea.</footer>
+<footer><footer>
+  <strong>Vanuatu Business Hub</strong><br>
+  Connect · Trade · Grow<br>
+  Connecting businesses across Torba, Sanma, Penama,
+  Malampa, Shefa and Tafea.<br>
+  © <span id="year"></span> Vanuatu Business Hub. All rights reserved.
+</footer></footer>
 <script>
 const form=document.getElementById('registrationForm'),msg=document.getElementById('formMessage');
 form.addEventListener('submit',async e=>{
@@ -252,11 +258,5 @@ const yearElement = document.getElementById("year");
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
-  <footer>
-  <strong>Vanuatu Business Hub</strong><br>
-  Connect · Trade · Grow<br>
-  Connecting businesses across Torba, Sanma, Penama,
-  Malampa, Shefa and Tafea.<br>
-  © <span id="year"></span> Vanuatu Business Hub. All rights reserved.
-</footer>
+ 
 </script></body></html>
