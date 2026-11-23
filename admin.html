@@ -256,11 +256,6 @@ if(!data || data.length===0){
   return;
 }
 
-  if(error){
-    $('editMessage').textContent='Update failed: '+error.message;
-    return;
-  }
-
   $('editMessage').textContent='Business updated successfully!';
 
   editingId=null;
