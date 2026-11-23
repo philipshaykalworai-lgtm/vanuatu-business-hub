@@ -224,11 +224,21 @@ $('editForm').addEventListener('submit',async function(e){
     website:$('editWebsite').value.trim(),
     description:$('editDescription').value.trim()
   };
+const {data,error}=await client
+  .from('businesses')
+  .update(changes)
+  .eq('id',editingId)
+  .select();
 
-  const {error}=await client
-    .from('businesses')
-    .update(changes)
-    .eq('id',editingId);
+if(error){
+  $('editMessage').textContent='Update failed: '+error.message;
+  return;
+}
+
+if(!data || data.length===0){
+  $('editMessage').textContent='No business was updated. Check database permissions.';
+  return;
+}
 
   if(error){
     $('editMessage').textContent='Update failed: '+error.message;
