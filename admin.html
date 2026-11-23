@@ -117,6 +117,23 @@ async function init(){
 
 let editingId = null;
 
+function updateStatistics(all){
+
+  $('total').textContent = all.length;
+
+  $('pending').textContent =
+    all.filter(x=>String(x.status).toLowerCase()==='pending').length;
+
+  $('approved').textContent =
+    all.filter(x=>String(x.status).toLowerCase()==='approved').length;
+
+  $('rejected').textContent =
+    all.filter(x=>String(x.status).toLowerCase()==='rejected').length;
+
+}
+
+async function render(){
+
 async function render(){
   const {data:all,error} = await client
     .from('businesses')
@@ -128,7 +145,8 @@ async function render(){
     $('empty').style.display='block';
     return;
   }
-
+  updateStatistics(all || []);
+      
   const q=$('search').value.toLowerCase();
   const p=$('province').value;
   const s=$('status').value.toLowerCase();
