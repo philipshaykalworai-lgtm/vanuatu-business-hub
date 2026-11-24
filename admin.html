@@ -3,7 +3,7 @@
 <meta name="description" content="Vanuatu Business Hub connects customers with local businesses across all six provinces.">
 <title>Administrator Dashboard | Vanuatu Business Hub</title><link rel="icon" type="image/webp" href="assets/vanuatu-business-hub-mark.webp"><style>
 :root{--navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed}
-*{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+*{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)} 
 header{background:var(--navy);color:#fff;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .brand{font-size:20px;font-weight:800;letter-spacing:.3px}.brand span{color:var(--gold)}
 nav{display:flex;gap:17px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:700}nav a:hover{color:var(--gold)}
@@ -51,7 +51,34 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 <table style="width:100%;border-collapse:collapse;min-width:800px"><thead><tr><th>Business</th><th>Category</th><th>Province</th><th>Contact</th><th>Status</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div>
       <p id="empty" class="muted" style="display:none">No matching submissions.</p></section>
 
-<section class="panel" id="editPanel" style="display:none;margin-top:20px">
+<section class="panel">
+
+<div class="grid" style="grid-template-columns:2fr 1fr 1fr 1fr">
+
+<input id="search" placeholder="Search business, contact or email">
+
+<select id="province">
+<option value="">All provinces</option>
+<option>Torba</option>
+<option>Sanma</option>
+<option>Penama</option>
+<option>Malampa</option>
+<option>Shefa</option>
+<option>Tafea</option>
+</select>
+
+<select id="category">
+<option value="">All categories</option>
+</select>
+
+<select id="status">
+<option value="">All statuses</option>
+<option>Pending</option>
+<option>Approved</option>
+<option>Rejected</option>
+</select>
+
+</div>
   <h2>Edit Business Details</h2>
   <p class="muted">Update the business information below.</p>
 
@@ -112,7 +139,11 @@ async function init(){
  if(!profile||profile.role!=='admin'){await client.auth.signOut();location.href='admin-login.html';return;}
  $('adminNotice').textContent='Signed in as '+user.email;
  $('logoutBtn').addEventListener('click',async()=>{await client.auth.signOut();location.href='admin-login.html';});
- ['search','province','status'].forEach(id=>$(id).addEventListener('input',render));await render();
+  ['search','province','category','status'].forEach(id=>{
+  $(id).addEventListener('input',render);
+});
+
+await render();
 }
 
 let editingId = null;
@@ -131,7 +162,25 @@ function updateStatistics(all){
     all.filter(x=>String(x.status).toLowerCase()==='rejected').length;
 
 }
+function updateCategoryFilter(all){
 
+  const selected = $('category').value;
+
+  const categories = [...new Set(
+    all.map(x=>(x.category||'').trim())
+       .filter(Boolean)
+  )].sort((a,b)=>a.localeCompare(b));
+
+  $('category').innerHTML =
+    '<option value="">All categories</option>' +
+    categories.map(c=>
+      `<option value="${esc(c)}">${esc(c)}</option>`
+    ).join('');
+
+  if(categories.includes(selected)){
+    $('category').value=selected;
+  }
+}
 async function render(){
   const {data:all,error} = await client
     .from('businesses')
@@ -143,18 +192,26 @@ async function render(){
     $('empty').style.display='block';
     return;
   }
-  updateStatistics(all || []);
+ updateStatistics(all || []);
+updateCategoryFilter(all || []);
       
   const q=$('search').value.toLowerCase();
   const p=$('province').value;
-  const s=$('status').value.toLowerCase();
+const c=$('category').value.toLowerCase();
+const s=$('status').value.toLowerCase();
   
   const shown=all.filter(x=>
-    (!p||x.province===p)&&
-    (!s||String(x.status).toLowerCase()===s)&&
-    (!q||[x.business_name,x.contact_name,x.phone,x.location]
-      .join(' ').toLowerCase().includes(q))
-  );
+  (!p||x.province===p)&&
+  (!c||String(x.category||'').trim().toLowerCase()===c)&&
+  (!s||String(x.status).toLowerCase()===s)&&
+  (!q||[
+    x.business_name,
+    x.contact_name,
+    x.phone,
+    x.email,
+    x.location
+  ].join(' ').toLowerCase().includes(q))
+);
 
   
 $('rows').innerHTML=shown.map(x=>`
