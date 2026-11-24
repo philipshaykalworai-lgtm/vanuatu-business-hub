@@ -49,6 +49,65 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
   background:#f8d7da;
   color:#721c24;
 }
+      /* Administrator action buttons */
+.action-buttons{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  min-width:230px;
+}
+
+.action-btn{
+  border:0;
+  border-radius:6px;
+  padding:8px 11px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:opacity .2s, transform .2s;
+}
+
+.action-btn:hover{
+  opacity:.85;
+  transform:translateY(-1px);
+}
+
+.edit-btn{
+  background:#e3efff;
+  color:#1755a5;
+}
+
+.delete-btn{
+  background:#fde5e5;
+  color:#b42318;
+}
+
+.approve-btn{
+  background:#d9f5e5;
+  color:#167342;
+}
+
+.reject-btn{
+  background:#fff0df;
+  color:#b45309;
+}
+
+.pending-btn{
+  background:#e9edf2;
+  color:#455468;
+}
+
+@media(max-width:600px){
+  .action-buttons{
+    min-width:200px;
+    gap:5px;
+  }
+
+  .action-btn{
+    padding:8px 9px;
+  }
+}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/vanuatu-business-hub-mark.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
@@ -267,19 +326,49 @@ $('rows').innerHTML=shown.map(x=>`
   </span>
 </td>
       <td>
-        <button class="btn secondary" data-edit="${esc(x.id)}">Edit</button>
+  <div class="action-buttons">
+
+    <button
+      class="action-btn edit-btn"
+      data-edit="${esc(x.id)}">
+      Edit
+    </button>
+
+    <button
+      class="action-btn delete-btn"
+      data-delete="${esc(x.id)}"
+      data-name="${esc(x.business_name)}">
+      Delete
+    </button>
+
+    ${String(x.status).toLowerCase()==='pending'
+      ? `
         <button
-          style="background:#c0392b"
-          data-delete="${esc(x.id)}"
-          data-name="${esc(x.business_name)}">
-          Delete
+          class="action-btn approve-btn"
+          data-id="${esc(x.id)}"
+          data-status="Approved">
+          Approve
         </button>
-        ${String(x.status).toLowerCase()==='pending'
-          ? `<button data-id="${esc(x.id)}" data-status="Approved">Approve</button>
-             <button style="background:#a33" data-id="${esc(x.id)}" data-status="Rejected">Reject</button>`
-          : `<button class="btn secondary" data-id="${esc(x.id)}" data-status="Pending">Set pending</button>`
-        }
-      </td>
+
+        <button
+          class="action-btn reject-btn"
+          data-id="${esc(x.id)}"
+          data-status="Rejected">
+          Reject
+        </button>
+      `
+      : `
+        <button
+          class="action-btn pending-btn"
+          data-id="${esc(x.id)}"
+          data-status="Pending">
+          Set Pending
+        </button>
+      `
+    }
+
+  </div>
+</td>
     </tr>
   `).join('');
 
