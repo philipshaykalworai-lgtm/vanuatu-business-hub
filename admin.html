@@ -108,6 +108,102 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
     padding:8px 9px;
   }
 }
+      
+/* Dashboard statistics cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5eaf0;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(18, 48, 74, 0.05);
+  border-top: 4px solid #12304A;
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(18, 48, 74, 0.10);
+}
+
+.stat-info small {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat-info h2 {
+  font-size: 32px;
+  margin: 0 0 8px;
+  color: #12304A;
+}
+
+.stat-info span {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 23px;
+  background: #f1f5f9;
+}
+
+/* Card accent colours */
+.total-card {
+  border-top-color: #12304A;
+}
+
+.pending-card {
+  border-top-color: #f5a623;
+}
+
+.approved-card {
+  border-top-color: #16a34a;
+}
+
+.rejected-card {
+  border-top-color: #dc2626;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/vanuatu-business-hub-mark.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
@@ -126,7 +222,47 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 </nav></header>
 
 <main><h1>Administrator Dashboard</h1><p class="muted">Review business registration submissions and approve listings for the directory.</p><p id="adminNotice" class="muted"></p><button id="logoutBtn" style="float:right">Sign out</button>
-<section class="grid" style="grid-template-columns:repeat(4,1fr);margin:20px 0">
+
+<section class="stats-grid">
+
+  <div class="stat-card total-card">
+    <div class="stat-info">
+      <small>Total Businesses</small>
+      <h2 id="total">0</h2>
+      <span>All registrations</span>
+    </div>
+    <div class="stat-icon">🏢</div>
+  </div>
+
+  <div class="stat-card pending-card">
+    <div class="stat-info">
+      <small>Pending</small>
+      <h2 id="pending">0</h2>
+      <span>Awaiting approval</span>
+    </div>
+    <div class="stat-icon">⏳</div>
+  </div>
+
+  <div class="stat-card approved-card">
+    <div class="stat-info">
+      <small>Approved</small>
+      <h2 id="approved">0</h2>
+      <span>Active listings</span>
+    </div>
+    <div class="stat-icon">✓</div>
+  </div>
+
+  <div class="stat-card rejected-card">
+    <div class="stat-info">
+      <small>Rejected</small>
+      <h2 id="rejected">0</h2>
+      <span>Rejected listings</span>
+    </div>
+    <div class="stat-icon">✕</div>
+  </div>
+
+</section>
+
 <div class="stat"><small>Total</small><h2 id="total">0</h2></div><div class="stat"><small>Pending</small><h2 id="pending">0</h2></div><div class="stat"><small>Approved</small><h2 id="approved">0</h2></div><div class="stat"><small>Rejected</small><h2 id="rejected">0</h2></div></section>
 <section class="panel"><div class="grid" style="grid-template-columns:2fr 1fr 1fr"><input id="search" placeholder="Search business or contact"><select id="province"><option value="">All provinces</option><option>Torba</option><option>Sanma</option><option>Penama</option><option>Malampa</option><option>Shefa</option><option>Tafea</option></select><select id="status"><option value="">All statuses</option><option>Pending</option><option>Approved</option><option>Rejected</option></select></div>
 <div class="table-wrapper">
