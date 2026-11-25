@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Vanuatu Business Hub connects customers with local businesses across all six provinces.">
-<title>Administrator Dashboard | Vanuatu Business Hub</title><link rel="icon" type="image/webp" href="assets/vanuatu-business-hub-mark.webp"><style>
+<title>Administrator Dashboard | Vanuatu Business Hub</title><link rel="icon" type="image/webp" href="assets/Logo.webp"><style>
 :root{--navy:#12304A;--teal:#16A6A1;--gold:#F2B544;--cloud:#F5F8FA;--ink:#203040;--muted:#687887;--line:#dfe7ed}
 *{box-sizing:border-box}body{margin:0;background:var(--cloud);font-family:Arial,Helvetica,sans-serif;color:var(--ink)} 
 header{background:var(--navy);color:#fff;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -288,8 +288,47 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
     margin: 15px auto;
   }
 }
+      /* Mobile navigation */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .site-header nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 15px;
+  }
+
+  .site-header nav.active {
+    display: flex;
+  }
+
+  .site-header nav a {
+    display: block;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
-<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/vanuatu-business-hub-mark.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
+<header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
       id="menuToggle"
       aria-label="Toggle navigation"
@@ -757,4 +796,15 @@ init();
 
     menuToggle.setAttribute('aria-expanded', isOpen);
   });
+      const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.querySelector(".site-header nav");
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", function () {
+    const isOpen = mainNav.classList.toggle("active");
+
+    menuToggle.setAttribute("aria-expanded", isOpen);
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+}
 </script></body></html>
