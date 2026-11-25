@@ -304,10 +304,7 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
     flex-wrap: wrap;
   }
 
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
+ 
 
   .site-header nav {
     display: none;
@@ -786,16 +783,18 @@ async function deleteBusiness(id,name){
 
 init();
 
-      const menuToggle = document.getElementById('menuToggle');
-  const mainNav = document.querySelector('.site-header nav');
+     // Mobile navigation menu
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.querySelector('.site-header nav');
 
+if (menuToggle && mainNav) {
   menuToggle.addEventListener('click', function () {
-    mainNav.classList.toggle('active');
-
-    const isOpen = mainNav.classList.contains('active');
+    const isOpen = mainNav.classList.toggle('active');
 
     menuToggle.setAttribute('aria-expanded', isOpen);
+    menuToggle.textContent = isOpen ? '✕' : '☰';
   });
+}
 
 if (menuToggle && mainNav) {
   menuToggle.addEventListener("click", function () {
