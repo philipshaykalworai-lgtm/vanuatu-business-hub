@@ -271,12 +271,57 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
   
      
 /* Mobile navigation */
+
+/* Mobile navigation */
 .menu-toggle {
   display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 5px 10px;
 }
+
+@media (max-width: 768px) {
+  .site-header {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .site-header nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-top: 12px;
+  }
+
+  .site-header nav.active {
+    display: flex;
+  }
+
+  .site-header nav a {
+    display: block;
+    padding: 12px 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
       
      
-}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
