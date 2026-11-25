@@ -203,7 +203,26 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
     padding: 18px;
   }
 }
+/* Dashboard sign out button */
+.logout-area {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 15px;
+}
 
+.logout-btn {
+  background: #c0392b;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #a93226;
+}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/vanuatu-business-hub-mark.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
@@ -221,7 +240,11 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
   <a href="admin-login.html">Admin</a>
 </nav></header>
 
-<main><h1>Administrator Dashboard</h1><p class="muted">Review business registration submissions and approve listings for the directory.</p><p id="adminNotice" class="muted"></p><button id="logoutBtn" style="float:right">Sign out</button>
+<main><h1>Administrator Dashboard</h1><p class="muted">Review business registration submissions and approve listings for the directory.</p><p id="adminNotice" class="muted"></p><div class="logout-area">
+  <button id="logoutBtn" class="logout-btn">
+    Sign out
+  </button>
+</div>
 
 <section class="stats-grid">
 
