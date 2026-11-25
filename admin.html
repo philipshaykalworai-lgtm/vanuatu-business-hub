@@ -113,8 +113,20 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: 15px;
   margin: 20px 0;
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat-card {
@@ -223,6 +235,39 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 .logout-btn:hover {
   background: #a93226;
 }
+      .admin-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 15px;
+  align-items: end;
+}
+
+.admin-filters input,
+.admin-filters select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .admin-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .admin-filters {
+    grid-template-columns: 1fr;
+  }
+}
+      .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper table {
+  min-width: 750px;
+}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/vanuatu-business-hub-mark.webp" alt="Vanuatu Business Hub island and flag emblem"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
@@ -290,7 +335,7 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
 
 <section class="panel">
 
-  <div class="grid" style="grid-template-columns:2fr 1fr 1fr 1fr">
+<div class="grid admin-filters">
 
     <input
       id="search"
