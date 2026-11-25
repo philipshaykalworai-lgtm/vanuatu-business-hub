@@ -796,12 +796,4 @@ if (menuToggle && mainNav) {
   });
 }
 
-if (menuToggle && mainNav) {
-  menuToggle.addEventListener("click", function () {
-    const isOpen = mainNav.classList.toggle("active");
-
-    menuToggle.setAttribute("aria-expanded", isOpen);
-    menuToggle.textContent = isOpen ? "✕" : "☰";
-  });
-}
 </script></body></html>
