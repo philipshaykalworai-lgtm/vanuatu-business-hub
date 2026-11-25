@@ -485,6 +485,7 @@ async function render() {
   }
 }
 
+
 document.getElementById('search').addEventListener('input', () => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(render, 300);
@@ -493,25 +494,21 @@ document.getElementById('search').addEventListener('input', () => {
 document.getElementById('province').addEventListener('change', render);
 document.getElementById('category').addEventListener('change', render);
 
+// Mobile navigation
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener('click', function () {
+    const isOpen = mainNav.classList.toggle('open');
+
+    menuToggle.setAttribute('aria-expanded', isOpen);
+    menuToggle.textContent = isOpen ? '✕' : '☰';
+  });
+}
+
+// Load directory once on page start
 render();
-document.getElementById('search').addEventListener('input', () => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(render, 300);
-});
-
-document.getElementById('province').addEventListener('change', render);
-document.getElementById('category').addEventListener('change', render);
-
-render();;
-  
-
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
-
-menuToggle.addEventListener("click", function() {
-  const isOpen = mainNav.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", isOpen);
-});
 
 
 </script></body></html>
