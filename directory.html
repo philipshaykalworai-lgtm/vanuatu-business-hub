@@ -319,16 +319,8 @@ nav a.active {
     <div>
       <label for="category">Business Category</label>
       <select id="category">
-        <option value="">All categories</option>
-        <option>Building & Construction</option>
-        <option>Food & Agriculture</option>
-        <option>Retail & Shopping</option>
-        <option>Transport</option>
-        <option>Tourism & Accommodation</option>
-        <option>Arts & Handicrafts</option>
-        <option>Professional Services</option>
-        <option>Other Services</option>
-      </select>
+  <option value="">All Categories</option>
+</select>
     </div>
   </div>
 
@@ -370,6 +362,62 @@ function clearDirectoryFilters() {
 
 let requestNumber = 0;
 let searchTimer;
+
+async function loadCategories() {
+  const categorySelect = document.getElementById('category');
+
+  if (!window.vbhSupabaseReady()) {
+    return;
+  }
+
+  try {
+    const client = window.supabase.createClient(
+      window.VBH_SUPABASE_URL,
+      window.VBH_SUPABASE_ANON_KEY
+    );
+
+    const { data, error } = await client
+      .from('businesses')
+      .select('category')
+      .eq('status', 'Approved')
+      .not('category', 'is', null)
+      .order('category', { ascending: true });
+
+    if (error) throw error;
+
+    const selectedCategory = categorySelect.value;
+
+    // Remove duplicates and ignore blank categories
+    const categories = [...new Set(
+      data
+        .map(item => String(item.category || '').trim())
+        .filter(Boolean)
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Rebuild the dropdown safely
+    categorySelect.innerHTML = '';
+
+    const allOption = document.createElement('option');
+    allOption.value = '';
+    allOption.textContent = 'All Categories';
+    categorySelect.appendChild(allOption);
+
+    categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categorySelect.appendChild(option);
+    });
+
+    // Keep the selected category if it still exists
+    if (categories.includes(selectedCategory)) {
+      categorySelect.value = selectedCategory;
+    }
+
+  } catch (error) {
+    console.error('Unable to load categories:', error);
+  }
+}
 
 async function render() {
   const currentRequest = ++requestNumber;
@@ -507,8 +555,11 @@ if (menuToggle && mainNav) {
   });
 }
 
-// Load directory once on page start
-render();
+
+// Load categories first, then display the directory
+loadCategories().then(() => {
+  render();
+});
 
 
 </script></body></html>
