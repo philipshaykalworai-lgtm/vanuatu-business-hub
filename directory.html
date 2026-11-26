@@ -339,17 +339,42 @@ const grid = document.getElementById('businessGrid');
 const empty = document.getElementById('empty');
 const count = document.getElementById('count');
 
+const client = window.vbhSupabaseReady()
+  ? window.supabase.createClient(
+      window.VBH_SUPABASE_URL,
+      window.VBH_SUPABASE_ANON_KEY
+    )
+  : null;
+
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   '&':'&amp;', '<':'&lt;', '>':'&gt;',
   '"':'&quot;', "'":'&#39;'
 }[c]));
 
-function safeUrl(s) {
+function safeUrl(value) {
   try {
-    const u = new URL(s);
-    return ['http:', 'https:'].includes(u.protocol) ? u.href : '#';
+    let url = String(value || '').trim();
+
+    if (!url) return '';
+
+    // Add HTTPS if the user did not enter a protocol
+    if (!/^https?:\/\//i.test(url)) {
+      url = 'https://' + url;
+    }
+
+    const parsed = new URL(url);
+
+    if (
+      parsed.protocol !== 'https:' &&
+      parsed.protocol !== 'http:'
+    ) {
+      return '';
+    }
+
+    return parsed.href;
+
   } catch {
-    return '#';
+    return '';
   }
 }
 
@@ -371,11 +396,7 @@ async function loadCategories() {
   }
 
   try {
-    const client = window.supabase.createClient(
-      window.VBH_SUPABASE_URL,
-      window.VBH_SUPABASE_ANON_KEY
-    );
-
+  
     const { data, error } = await client
       .from('businesses')
       .select('category')
@@ -503,11 +524,12 @@ async function render() {
                 ${esc(x.email)}
               </a></p>` : ''}
 
-            ${x.website ? `
-              <p>🌐 <a href="${esc(safeUrl(x.website))}"
-                target="_blank" rel="noopener noreferrer">
-                Visit Website / Facebook
-              </a></p>` : ''}
+            ${safeUrl(x.website) ? `
+  <p>🌐 <a href="${esc(safeUrl(x.website))}"
+    target="_blank"
+    rel="noopener noreferrer">
+    Visit Website / Facebook
+  </a></p>` : ''}
           </div>
         </article>
       `;
@@ -546,12 +568,40 @@ document.getElementById('category').addEventListener('change', render);
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
 
+function closeMenu() {
+  if (!menuToggle || !mainNav) return;
+
+  mainNav.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.textContent = '☰';
+}
+
 if (menuToggle && mainNav) {
+
   menuToggle.addEventListener('click', function () {
     const isOpen = mainNav.classList.toggle('open');
 
-    menuToggle.setAttribute('aria-expanded', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuToggle.textContent = isOpen ? '✕' : '☰';
+  });
+
+  // Close menu after selecting a navigation link
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu with Escape key
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  // Close menu when returning to desktop width
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 650) {
+      closeMenu();
+    }
   });
 }
 
