@@ -163,6 +163,140 @@ nav a.active {
   }
 }
 
+/* MOBILE REGISTRATION PAGE */
+
+@media (max-width: 650px) {
+
+  /* Main page spacing */
+  main {
+    margin: 22px auto;
+    padding: 0 14px;
+  }
+
+  main > h1 {
+    font-size: 27px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  main > p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Registration layout */
+  .registration-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .registration-form {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .registration-form .panel {
+    height: auto;
+    padding: 17px;
+  }
+
+  /* Stack all form fields */
+  .registration-form .grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .registration-form label {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+
+  .registration-form input:not([type="checkbox"]),
+  .registration-form select,
+  .registration-form textarea {
+    width: 100%;
+    min-height: 46px;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .registration-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* Consent checkbox */
+  #consent {
+    flex-shrink: 0;
+    width: 20px !important;
+    height: 20px;
+    margin-right: 3px;
+  }
+
+  /* Submit and directory buttons */
+  .registration-form button[type="submit"],
+  .registration-form a.btn {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  /* Registration image */
+  .registration-visual {
+    order: 2;
+    width: 100%;
+    min-height: 330px;
+    border-radius: 14px;
+  }
+
+  .visual-message {
+    left: 18px;
+    right: 18px;
+    bottom: 20px;
+  }
+
+  .visual-message h2 {
+    font-size: 27px;
+    line-height: 1.2;
+  }
+
+  .visual-message p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .visual-kicker {
+    font-size: 10px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 24px 15px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 380px) {
+  main > h1 {
+    font-size: 24px;
+  }
+
+  .registration-form .panel {
+    padding: 13px;
+  }
+
+  .visual-message h2 {
+    font-size: 24px;
+  }
+}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 
 <header>
@@ -243,16 +377,44 @@ form.addEventListener('submit',async e=>{
  if(error){msg.textContent='Submission could not be completed: '+error.message;return;}
  msg.textContent='Thank you. Your business has been submitted and is awaiting administrator review.';form.reset();
 });
-  const menuToggle = document.getElementById("menuToggle");
+ 
+const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
 
-menuToggle.addEventListener("click", function() {
+function closeMenu() {
+  if (!menuToggle || !mainNav) return;
 
-  const isOpen = mainNav.classList.toggle("open");
+  mainNav.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.textContent = "☰";
+}
 
-  menuToggle.setAttribute("aria-expanded", isOpen);
+if (menuToggle && mainNav) {
 
-});
+  menuToggle.addEventListener("click", function() {
+    const isOpen = mainNav.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  mainNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", function() {
+    if (window.innerWidth > 650) {
+      closeMenu();
+    }
+  });
+}
+
 
 const yearElement = document.getElementById("year");
 if (yearElement) {
