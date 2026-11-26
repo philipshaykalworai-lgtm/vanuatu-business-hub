@@ -210,10 +210,66 @@ nav a.active {
   cursor: pointer;
 }
 
+
 @media (max-width: 650px) {
   header {
     padding: 10px 16px;
   }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .logo {
+    max-width: calc(100% - 55px);
+  }
+
+  .brand-name {
+    font-size: 17px;
+    white-space: normal;
+  }
+
+  .logo img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .tagline {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    order: 2;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  nav {
+    display: none;
+    order: 3;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    display: block;
+    padding: 13px 10px;
+    border-top: 1px solid #ffffff20;
+    font-size: 15px;
+  }
+}
+
 
   .navbar {
     flex-wrap: wrap;
@@ -247,6 +303,73 @@ nav a.active {
     display: flex;
   }
 }
+  
+/* Mobile directory improvements */
+@media (max-width: 600px) {
+  main {
+    margin: 20px auto;
+    padding: 0 14px;
+  }
+
+  .panel {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .filter-panel {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  input,
+  select {
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  .filter-actions {
+    justify-content: stretch;
+  }
+
+  .filter-actions button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  #businessGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .business-card {
+    padding: 18px;
+  }
+
+  .business-card h2 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .business-info {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .directory-hero {
+    padding: 45px 16px;
+    min-height: 230px;
+  }
+
+  .directory-hero h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .directory-hero p {
+    font-size: 14px;
+  }
+}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 
 <header>
