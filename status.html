@@ -1,0 +1,593 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Check your Vanuatu Business Hub business registration application status.">
+<title>Application Status | Vanuatu Business Hub</title>
+<link rel="icon" type="image/webp" href="assets/Logo.webp">
+
+<style>
+:root{
+  --navy:#12304A;
+  --teal:#16A6A1;
+  --gold:#F2B544;
+  --cloud:#F5F8FA;
+  --ink:#203040;
+  --muted:#687887;
+  --line:#dfe7ed;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--cloud);
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+}
+
+header{
+  background:var(--navy);
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:4px solid var(--gold);
+  padding:10px clamp(16px,4vw,56px);
+  width:100%;
+}
+
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  gap:18px;
+  position:relative;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:white;
+  text-decoration:none;
+}
+
+.logo img{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:50%;
+  background:white;
+  padding:2px;
+}
+
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+
+.brand-name{
+  font-size:21px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.vanuatu{color:var(--gold)}
+.hub{color:#4fd0c6}
+
+.tagline{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.3px;
+  margin-top:5px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:clamp(10px,2vw,22px);
+  flex-wrap:wrap;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  padding:9px 0;
+}
+
+nav a:hover,
+nav a:focus,
+nav a.active{
+  color:var(--gold);
+}
+
+.menu-toggle{
+  display:none;
+  background:transparent;
+  border:1px solid white;
+  color:white;
+  padding:7px 12px;
+  border-radius:5px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+main{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 20px;
+}
+
+h1,h2{color:var(--navy)}
+
+.intro{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 5px 20px #12304a0a;
+  margin-top:24px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  font-size:14px;
+  margin:16px 0 7px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:1px solid #cbd7df;
+  border-radius:8px;
+  font:inherit;
+  font-size:16px;
+}
+
+button,.btn{
+  display:inline-block;
+  border:0;
+  border-radius:8px;
+  padding:13px 18px;
+  background:var(--teal);
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.btn.secondary{
+  background:#eaf0f5;
+  color:var(--navy);
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.message{
+  margin-top:18px;
+  padding:14px;
+  border-radius:9px;
+  line-height:1.6;
+  display:none;
+}
+
+.message.error{
+  display:block;
+  background:#fff0ef;
+  border:1px solid #efc1bc;
+  color:#8b3028;
+}
+
+.result{
+  display:none;
+  margin-top:22px;
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#f8fafc;
+}
+
+.result h2{
+  margin-top:0;
+  font-size:21px;
+}
+
+.status{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:800;
+  margin:8px 0;
+}
+
+.status.pending{
+  background:#fff1cf;
+  color:#795600;
+}
+
+.status.approved{
+  background:#e0f5e9;
+  color:#17643e;
+}
+
+.status.rejected{
+  background:#fde7e7;
+  color:#962f2f;
+}
+
+.status.unknown{
+  background:#eaf0f5;
+  color:#405568;
+}
+
+.result p{
+  line-height:1.6;
+}
+
+.notice{
+  background:#fff8e8;
+  border-left:4px solid var(--gold);
+  padding:14px;
+  border-radius:8px;
+  color:#6d531c;
+  font-size:13px;
+  line-height:1.6;
+  margin-top:20px;
+}
+
+footer{
+  border-top:1px solid var(--line);
+  background:white;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  padding:26px 16px;
+  line-height:1.7;
+}
+
+@media(max-width:650px){
+  header{padding:10px 16px}
+
+  .navbar{flex-wrap:wrap}
+
+  .brand-name{font-size:18px}
+
+  .logo img{
+    width:50px;
+    height:50px;
+  }
+
+  .menu-toggle{
+    display:block;
+    margin-left:auto;
+    order:2;
+  }
+
+  nav{
+    display:none;
+    order:3;
+    width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:10px 0;
+  }
+
+  nav.open{display:flex}
+
+  main{
+    margin:25px auto;
+    padding:0 14px;
+  }
+
+  .panel{padding:18px}
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions button,
+  .actions a{
+    width:100%;
+    text-align:center;
+  }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+
+<body>
+
+<header>
+  <div class="navbar">
+
+    <a href="index.html" class="logo">
+      <img src="assets/Logo.webp" alt="Vanuatu Business Hub">
+
+      <div class="brand-text">
+        <div class="brand-name">
+          <span class="vanuatu">Vanuatu</span>
+          <span class="hub">Business Hub</span>
+        </div>
+
+        <div class="tagline">CONNECT · TRADE · GROW</div>
+      </div>
+    </a>
+
+    <button class="menu-toggle"
+      id="menuToggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false">
+      ☰
+    </button>
+
+    <nav id="mainNav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="directory.html">Directory</a>
+      <a href="register.html">Register</a>
+      <a href="status.html" class="active">Application Status</a>
+      <a href="admin-login.html">Admin</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <h1>Check Your Application Status</h1>
+
+  <p class="intro">
+    Enter the application tracking code you received when registering
+    your business to check the progress of your listing.
+  </p>
+
+  <section class="panel">
+
+    <form id="statusForm">
+
+      <label for="trackingCode">
+        Application tracking code
+      </label>
+
+      <input
+        id="trackingCode"
+        type="text"
+        placeholder="Paste your tracking code here"
+        required
+        maxlength="36"
+        autocomplete="off"
+        spellcheck="false">
+
+      <div class="actions">
+        <button type="submit" id="checkButton">
+          Check application
+        </button>
+
+        <a href="register.html" class="btn secondary">
+          Register a business
+        </a>
+      </div>
+
+    </form>
+
+    <div id="statusMessage"
+      class="message"
+      role="status"
+      aria-live="polite"></div>
+
+    <div id="statusResult" class="result" aria-live="polite">
+
+      <h2 id="resultBusiness"></h2>
+
+      <p>Your application status:</p>
+
+      <span id="resultStatus" class="status"></span>
+
+      <p id="resultDescription"></p>
+
+    </div>
+
+    <div class="notice">
+      Keep your tracking code private. If you lose your code,
+      please contact the Vanuatu Business Hub administrator for assistance.
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <strong>Vanuatu Business Hub</strong><br>
+  Connect · Trade · Grow<br>
+  Connecting businesses across all six provinces.<br>
+  © <span id="year"></span> Vanuatu Business Hub.
+  All rights reserved.
+</footer>
+
+<script>
+const statusForm = document.getElementById("statusForm");
+const trackingInput = document.getElementById("trackingCode");
+const statusMessage = document.getElementById("statusMessage");
+const statusResult = document.getElementById("statusResult");
+const checkButton = document.getElementById("checkButton");
+
+const resultBusiness = document.getElementById("resultBusiness");
+const resultStatus = document.getElementById("resultStatus");
+const resultDescription = document.getElementById("resultDescription");
+
+const uuidPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+statusForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  statusMessage.className = "message";
+  statusMessage.textContent = "";
+  statusResult.style.display = "none";
+
+  const trackingCode = trackingInput.value.trim();
+
+  if (!uuidPattern.test(trackingCode)) {
+    statusMessage.className = "message error";
+    statusMessage.textContent =
+      "Please enter a valid application tracking code.";
+    return;
+  }
+
+  if (!window.vbhSupabaseReady()) {
+    statusMessage.className = "message error";
+    statusMessage.textContent =
+      "Database setup is not complete. Please try again later.";
+    return;
+  }
+
+  checkButton.disabled = true;
+  checkButton.textContent = "Checking...";
+
+  try {
+    const client = window.supabase.createClient(
+      window.VBH_SUPABASE_URL,
+      window.VBH_SUPABASE_ANON_KEY
+    );
+
+    const { data, error } = await client.rpc(
+      "check_business_application",
+      {
+        p_tracking_code: trackingCode
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data || data.length === 0) {
+      statusMessage.className = "message error";
+      statusMessage.textContent =
+        "We could not find an application with that tracking code. " +
+        "Please check the code and try again.";
+      return;
+    }
+
+    const application = data[0];
+    const status = String(application.application_status || "");
+
+    resultBusiness.textContent = application.business_name;
+
+    resultStatus.textContent = status;
+    resultStatus.className = "status";
+
+    resultDescription.textContent = "";
+
+    if (status === "Pending") {
+      resultStatus.classList.add("pending");
+      resultDescription.textContent =
+        "Your listing has been received and is waiting for " +
+        "administrator review. Thank you for registering.";
+    } else if (status === "Approved") {
+      resultStatus.classList.add("approved");
+      resultDescription.textContent =
+        "Congratulations! Your business listing has been approved. " +
+        "It should now appear in the public directory.";
+    } else if (status === "Rejected") {
+      resultStatus.classList.add("rejected");
+      resultDescription.textContent =
+        "Your listing was not approved. Please contact the Hub " +
+        "administrator for further information.";
+    } else {
+      resultStatus.classList.add("unknown");
+      resultDescription.textContent =
+        "Your application status has been returned. " +
+        "Please contact the administrator if you need assistance.";
+    }
+
+    statusResult.style.display = "block";
+
+  } catch (error) {
+    console.error("Application status check failed:", error);
+
+    statusMessage.className = "message error";
+    statusMessage.textContent =
+      "We could not check your application right now. " +
+      "Please try again later.";
+  } finally {
+    checkButton.disabled = false;
+    checkButton.textContent = "Check application";
+  }
+});
+
+
+// Mobile navigation
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
+function closeMenu() {
+  if (!menuToggle || !mainNav) return;
+
+  mainNav.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.textContent = "☰";
+}
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", function() {
+    const isOpen = mainNav.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  mainNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", function() {
+    if (window.innerWidth > 650) {
+      closeMenu();
+    }
+  });
+}
+
+
+// Footer year
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
+</body>
+</html>
