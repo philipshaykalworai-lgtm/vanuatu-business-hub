@@ -211,18 +211,21 @@ nav a.active {
 }
 
 
+
 @media (max-width: 650px) {
   header {
     padding: 10px 16px;
   }
 
   .navbar {
+    display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
   }
 
   .logo {
-    max-width: calc(100% - 55px);
+    max-width: calc(100% - 60px);
   }
 
   .brand-name {
@@ -239,6 +242,36 @@ nav a.active {
     font-size: 9px;
     letter-spacing: 1px;
   }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    order: 2;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  nav {
+    display: none;
+    order: 3;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    display: block;
+    padding: 13px 10px;
+    border-top: 1px solid #ffffff20;
+    font-size: 15px;
+  }
+}
 
   
   
