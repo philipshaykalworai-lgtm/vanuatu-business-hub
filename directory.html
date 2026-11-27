@@ -666,7 +666,9 @@ async function render() {
     let query = client
       .from('businesses')
      
-.select('id,business_name,category,province,location,contact_name,phone,email,website,image_url,description')
+
+.select('id,business_name,category,province,location,contact_name,phone,email,website,image_url,cover_image_url,description')
+
 
       .eq('status', 'Approved')
       .order('created_at', { ascending: false });
@@ -698,19 +700,23 @@ async function render() {
 const phone = String(x.phone || '').replace(/[^\d+]/g, '');
 
 const imageUrl = safeUrl(x.image_url) || 'assets/Logo.webp';
+      
+const coverImageUrl = safeUrl(x.cover_image_url) ||
+  'assets/VANUATU-blogs-vanuatu-festivals-and-cultural-events-banner-MY-VANUATU-768x480-1.jpg';
+
 
 return `
-  <article class="business-card">
+ 
+<div class="business-cover-wrap">
+  <img
+    class="business-cover"
+    src="${esc(coverImageUrl)}"
+    alt="${esc(x.business_name)} company image"
+    loading="lazy"
+    onerror="this.onerror=null;this.src='assets/VANUATU-blogs-vanuatu-festivals-and-cultural-events-banner-MY-VANUATU-768x480-1.jpg';"
+  >
+</div>
 
-    <div class="business-image-wrap">
-      <img
-        class="business-image"
-        src="${esc(imageUrl)}"
-        alt="${esc(x.business_name)} logo"
-        loading="lazy"
-        onerror="this.onerror=null;this.src='assets/Logo.webp';"
-      >
-    </div>
 
     
 <div class="business-title-row">
