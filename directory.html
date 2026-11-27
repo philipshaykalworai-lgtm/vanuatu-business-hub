@@ -752,7 +752,21 @@ async function render() {
       .from('businesses')
      
 
-.select('id,business_name,category,province,location,contact_name,phone,email,website,image_url,cover_image_url,description')
+.select(`
+  id,
+  business_name,
+  category,
+  province,
+  location,
+  contact_name,
+  phone,
+  email,
+  website,
+  image_url,
+  cover_image_url,
+  business_logo_url,
+  description
+`)
 
 
       .eq('status', 'Approved')
@@ -780,64 +794,112 @@ async function render() {
     count.textContent =
       `${data.length} approved business${data.length === 1 ? '' : 'es'} found`;
 
-    grid.innerHTML = data.map(x => {
-      
-  <article class="business-card">
-
-
     
-<div class="business-title-row">
+grid.innerHTML = data.map(x => {
 
-  <img
-    class="business-small-logo"
-    src="${esc(imageUrl)}"
-    alt=""
-    loading="lazy"
-    onerror="this.onerror=null;this.src='assets/Logo.webp';"
-  >
+  const phone = String(x.phone || '')
+    .replace(/[^\d+]/g, '');
 
-  <h2>${esc(x.business_name)}</h2>
+  // Large company image:
+  // Prefer the cover image, then the existing image_url.
+  // Never use a default banner.
+  const coverImage =
+    safeUrl(x.cover_image_url) ||
+    safeUrl(x.image_url);
 
-</div>
+  // Small logo beside the business name.
+  // No fallback logo is used.
+  const smallLogo = safeUrl(x.business_logo_url);
 
+  const website = safeUrl(x.website);
 
-          <span class="category-tag">
-            ${esc(x.category || 'General Business')}
-          </span>
+  return `
+    <article class="business-card">
 
-          <div class="business-info">
-            <p>📍 <strong>Location:</strong>
-              ${esc(x.location || 'Not provided')},
-              ${esc(x.province || '')}
-            </p>
+      ${coverImage ? `
+        <div class="business-cover-wrap">
+          <img
+            class="business-cover"
+            src="${esc(coverImage)}"
+            alt="${esc(x.business_name)} company image"
+            loading="lazy"
+          >
+        </div>
+      ` : ''}
 
-            <p>${esc(x.description || 'No business description provided.')}</p>
+      <div class="business-title-row">
 
-            ${x.contact_name ? `
-              <p><strong>Contact person:</strong>
-                ${esc(x.contact_name)}
-              </p>` : ''}
+        ${smallLogo ? `
+          <img
+            class="business-small-logo"
+            src="${esc(smallLogo)}"
+            alt="${esc(x.business_name)} logo"
+            loading="lazy"
+          >
+        ` : ''}
 
-            ${phone ? `
-              <p>📞 <a href="tel:${phone}">
-                ${esc(x.phone)}
-              </a></p>` : ''}
+        <h2>${esc(x.business_name)}</h2>
 
-            ${x.email ? `
-              <p>✉️ <a href="mailto:${esc(x.email)}">
-                ${esc(x.email)}
-              </a></p>` : ''}
+      </div>
 
-            ${safeUrl(x.website) ? `
-  <p>🌐 <a href="${esc(safeUrl(x.website))}"
-    target="_blank"
-    rel="noopener noreferrer">
-    Visit Website / Facebook
-  </a></p>` : ''}
-          </div>
-        </article>
-      `;
-    }).join('');
+      <span class="category-tag">
+        ${esc(x.category || 'General Business')}
+      </span>
+
+      <div class="business-info">
+
+        <p>
+          📍 <strong>Location:</strong>
+          ${esc(x.location || 'Not provided')},
+          ${esc(x.province || '')}
+        </p>
+
+        <p>
+          ${esc(x.description || 'No business description provided.')}
+        </p>
+
+        ${x.contact_name ? `
+          <p>
+            <strong>Contact person:</strong>
+            ${esc(x.contact_name)}
+          </p>
+        ` : ''}
+
+        ${phone ? `
+          <p>
+            📞 <a href="tel:${esc(phone)}">
+              ${esc(x.phone)}
+            </a>
+          </p>
+        ` : ''}
+
+        ${x.email ? `
+          <p>
+            ✉️ <a href="mailto:${esc(x.email)}">
+              ${esc(x.email)}
+            </a>
+          </p>
+        ` : ''}
+
+        ${website ? `
+          <p>
+            🌐 <a
+              href="${esc(website)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Website / Facebook
+            </a>
+          </p>
+        ` : ''}
+
+      </div>
+
+    </article>
+  `;
+
+}).join('');
+
 
     empty.style.display = data.length ? 'none' : 'block';
 
