@@ -69,6 +69,30 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
   margin: 0 0 12px;
 }
 
+.business-image-wrap {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 18px;
+  background: #f5f8fa;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+}
+
+.business-card .business-image-wrap + h2 {
+  margin-top: 0;
+}
+
 .category-tag {
   display: inline-block;
   background: #e7f7f5;
@@ -559,7 +583,9 @@ async function render() {
 
     let query = client
       .from('businesses')
-      .select('id,business_name,category,province,location,contact_name,phone,email,website,description')
+     
+.select('id,business_name,category,province,location,contact_name,phone,email,website,image_url,description')
+
       .eq('status', 'Approved')
       .order('created_at', { ascending: false });
 
@@ -586,11 +612,26 @@ async function render() {
       `${data.length} approved business${data.length === 1 ? '' : 'es'} found`;
 
     grid.innerHTML = data.map(x => {
-      const phone = String(x.phone || '').replace(/[^\d+]/g, '');
+      
+const phone = String(x.phone || '').replace(/[^\d+]/g, '');
 
-      return `
-        <article class="business-card">
-          <h2>${esc(x.business_name)}</h2>
+const imageUrl = safeUrl(x.image_url) || 'assets/Logo.webp';
+
+return `
+  <article class="business-card">
+
+    <div class="business-image-wrap">
+      <img
+        class="business-image"
+        src="${esc(imageUrl)}"
+        alt="${esc(x.business_name)} logo"
+        loading="lazy"
+        onerror="this.onerror=null;this.src='assets/Logo.webp';"
+      >
+    </div>
+
+    <h2>${esc(x.business_name)}</h2>
+
 
           <span class="category-tag">
             ${esc(x.category || 'General Business')}
