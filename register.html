@@ -388,16 +388,42 @@ form.addEventListener('submit',async e=>{
  if(!window.vbhSupabaseReady()){msg.textContent='Database setup is not finished yet. Add your Supabase project URL and anon key to supabase-config.js.';return;}
  const client=window.supabase.createClient(window.VBH_SUPABASE_URL,window.VBH_SUPABASE_ANON_KEY);
  const get=id=>document.getElementById(id).value.trim();
- const record={business_name:get('businessName'),category:get('category'),province:get('province'),location:get('location'),contact_name:get('contactName'),phone:get('phone'),email:get('email')||null,website:get('website')||null,description:get('description'),status:'Pending'};
+
+const trackingCode = crypto.randomUUID();
+
+const record = {
+  business_name: get('businessName'),
+  category: get('category'),
+  province: get('province'),
+  location: get('location'),
+  contact_name: get('contactName'),
+  phone: get('phone'),
+  email: get('email') || null,
+  website: get('website') || null,
+  description: get('description'),
+  status: 'Pending',
+  tracking_code: trackingCode
+};
+
  const button=form.querySelector('button[type="submit"]');button.disabled=true;msg.textContent='Submitting...';
  const {error}=await client.from('businesses').insert(record);
  button.disabled=false;
  if(error){msg.textContent='Submission could not be completed: '+error.message;return;}
+
 msg.className = 'success';
-msg.innerHTML = '<strong>Thank you for registering your business!</strong>' +
-  'Your listing has been received and is now waiting for administrator approval. ' +
-  'Once approved, it will appear in the Vanuatu Business Hub directory.';form.reset();
-});
+
+msg.innerHTML =
+  '<strong>Thank you for registering your business!</strong>' +
+  '<p>Your listing has been received and is now waiting for administrator approval.</p>' +
+  '<p><strong>Your application tracking code:</strong></p>' +
+  '<p style="font-size:17px;font-weight:800;word-break:break-all;color:#12304A">' +
+  trackingCode +
+  '</p>' +
+  '<p>Please save this code. You can use it to check your application status.</p>' +
+  '<a class="btn" href="status.html">Check application status</a>';
+
+form.reset();
+
  
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
