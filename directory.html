@@ -660,7 +660,20 @@ return `
       >
     </div>
 
-    <h2>${esc(x.business_name)}</h2>
+    
+<div class="business-title-row">
+
+  <img
+    class="business-small-logo"
+    src="${esc(imageUrl)}"
+    alt=""
+    loading="lazy"
+    onerror="this.onerror=null;this.src='assets/Logo.webp';"
+  >
+
+  <h2>${esc(x.business_name)}</h2>
+
+</div>
 
 
           <span class="category-tag">
