@@ -24,6 +24,70 @@ nav{display:flex;align-items:center;gap:clamp(10px,2vw,22px);flex-wrap:wrap}nav 
 .hero-logo{display:block;width:min(100%,820px);height:auto;margin:0 auto 18px;border-radius:12px;box-shadow:0 12px 35px #071d2b25}
 footer{border-top:1px solid rgba(255,255,255,.18);background:rgba(7,31,55,.78);color:#e8f1f8;text-align:center;font-size:12px;padding:20px 16px;line-height:1.7}
 @media(max-width:620px){.site-header{justify-content:center}.brand{width:100%;justify-content:center;font-size:18px}.brand img{width:50px;height:50px}nav{justify-content:center;width:100%;gap:14px}nav a{font-size:13px}}
+
+/* Mobile hamburger navigation */
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+
+  .site-header {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .brand {
+    width: auto;
+    max-width: calc(100% - 60px);
+    justify-content: flex-start;
+    font-size: 18px;
+  }
+
+  .brand img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .site-header nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  .site-header nav.open {
+    display: flex;
+  }
+
+  .site-header nav a {
+    display: block;
+    padding: 13px 10px;
+    border-top: 1px solid #ffffff20;
+    font-size: 15px;
+  }
+
+}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head><body>
 <header class="site-header"><a class="brand" href="index.html" aria-label="Vanuatu Business Hub home"><img src="assets/Logo.webp" alt="Logo"><span>Vanuatu <b>Business Hub</b><small>Connect · Trade · Grow</small></span></a>
 <button class="menu-toggle"
@@ -32,7 +96,7 @@ footer{border-top:1px solid rgba(255,255,255,.18);background:rgba(7,31,55,.78);c
       aria-expanded="false">
       ☰
     </button>
-  <nav aria-label="Main navigation">
+  <nav id="mainNav" aria-label="Main navigation">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="services.html">Services</a>
@@ -56,4 +120,37 @@ document.getElementById('loginForm').addEventListener('submit',async e=>{
  if(profileError||profile.role!=='admin'){await client.auth.signOut();msg.textContent='This account does not have administrator access.';return;}
  location.href='admin.html';
 });
+      
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+
+function closeMenu() {
+  mainNav.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  menuToggle.textContent = '☰';
+}
+
+menuToggle.addEventListener('click', function() {
+  const isOpen = mainNav.classList.toggle('open');
+
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.textContent = isOpen ? '✕' : '☰';
+});
+
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeMenu();
+  }
+});
+
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 650) {
+    closeMenu();
+  }
+});
+
 </script></body></html>
