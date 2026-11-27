@@ -368,6 +368,28 @@ nav a.active {
 <div><label for="phone">Phone number *</label><input id="phone" required maxlength="40" placeholder="+678 ..."></div>
 <div><label for="email">Email (optional)</label><input id="email" type="email" maxlength="120"></div>
 <div><label for="website">Website or Facebook page (optional)</label><input id="website" type="url" maxlength="200" placeholder="https://..."></div>
+
+<div>
+  <label for="image_url">Company logo or image URL (optional)</label>
+  <input
+    id="image_url"
+    type="url"
+    maxlength="500"
+    placeholder="https://example.com/your-logo.jpg"
+  >
+  <div id="imagePreviewBox" style="display:none;margin-top:12px">
+    <img
+      id="imagePreview"
+      src=""
+      alt="Company image preview"
+      style="width:120px;height:120px;object-fit:contain;border:1px solid #dfe7ed;border-radius:10px;background:#fff;padding:6px"
+    >
+    <p style="font-size:12px;color:#687887">
+      Company image preview
+    </p>
+  </div>
+</div>
+
 </div>
 <label for="description">Describe your products or services *</label><textarea id="description" required rows="4" maxlength="600"></textarea>
 <p style="font-size:13px;color:#687887"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="consent" required style="width:auto;margin-top:2px"> I confirm that I am authorised to submit these business details and agree that approved listing information may be displayed publicly.</label></p>
@@ -399,9 +421,11 @@ const record = {
   location: get('location'),
   contact_name: get('contactName'),
   phone: get('phone'),
-  email: get('email') || null,
-  website: get('website') || null,
-  description: get('description'),
+  email: get('email') || null,  
+website: get('website') || null,
+image_url: get('image_url') || null,
+description: get('description'),
+
   status: 'Pending',
   tracking_code: trackingCode
 };
@@ -463,6 +487,43 @@ if (menuToggle && mainNav) {
   });
 }
 
+
+const imageUrlInput = document.getElementById("image_url");
+const imagePreview = document.getElementById("imagePreview");
+const imagePreviewBox = document.getElementById("imagePreviewBox");
+
+if (imageUrlInput && imagePreview && imagePreviewBox) {
+
+  imageUrlInput.addEventListener("input", function() {
+    const url = imageUrlInput.value.trim();
+
+    if (!url) {
+      imagePreviewBox.style.display = "none";
+      imagePreview.removeAttribute("src");
+      return;
+    }
+
+    try {
+      const parsedUrl = new URL(url);
+
+      if (parsedUrl.protocol !== "https:" &&
+          parsedUrl.protocol !== "http:") {
+        throw new Error("Invalid image URL");
+      }
+
+      imagePreviewBox.style.display = "block";
+      imagePreview.src = parsedUrl.href;
+
+    } catch {
+      imagePreviewBox.style.display = "none";
+      imagePreview.removeAttribute("src");
+    }
+  });
+
+  imagePreview.addEventListener("error", function() {
+    imagePreviewBox.style.display = "none";
+  });
+}
 
 const yearElement = document.getElementById("year");
 if (yearElement) {
