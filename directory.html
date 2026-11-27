@@ -93,6 +93,58 @@ footer{border-top:1px solid var(--line);background:#fff;text-align:center;color:
   margin-top: 0;
 }
 
+/* Large business cover photo */
+.business-cover-wrap {
+  height: 190px;
+  margin: -22px -22px 18px;
+  overflow: hidden;
+  background: #eaf0f5;
+  border-radius: 14px 14px 0 0;
+}
+
+.business-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Smaller logo beside business name */
+.business-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.business-small-logo {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border-radius: 50%;
+  object-fit: contain;
+  padding: 3px;
+  background: white;
+  border: 1px solid var(--line);
+}
+
+.business-title-row h2 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+@media(max-width:600px) {
+  .business-cover-wrap {
+    height: 175px;
+    margin: -18px -18px 16px;
+  }
+}
+
 /* Business name and small logo */
 .business-title-row {
   display: flex;
