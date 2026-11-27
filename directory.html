@@ -782,25 +782,7 @@ async function render() {
 
     grid.innerHTML = data.map(x => {
       
-const phone = String(x.phone || '').replace(/[^\d+]/g, '');
-
-const imageUrl = safeUrl(x.image_url) || 'assets/Logo.webp';
-      
-const coverImageUrl = safeUrl(x.cover_image_url) ||
-  'assets/VANUATU-blogs-vanuatu-festivals-and-cultural-events-banner-MY-VANUATU-768x480-1.jpg';
-
-
-return `
- 
-<div class="business-cover-wrap">
-  <img
-    class="business-cover"
-    src="${esc(coverImageUrl)}"
-    alt="${esc(x.business_name)} company image"
-    loading="lazy"
-    onerror="this.onerror=null;this.src='assets/VANUATU-blogs-vanuatu-festivals-and-cultural-events-banner-MY-VANUATU-768x480-1.jpg';"
-  >
-</div>
+  <article class="business-card">
 
 
     
